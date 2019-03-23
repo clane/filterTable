@@ -25,25 +25,11 @@
 		  async: false
 		});
 
-		//console.log(jsonObjectsArray);
-
-		let data = { 'tableData': jsonObjectsArray }; 
-		console.log(data); 
-
-		for (var key in data) {
-		   console.log(key);
-		}
-
 		for(let i = 0; i < jsonObjectsArray.length; i++) {
-
-			//console.log(jsonObjectsArray[i]);
-			//console.log(jsonObjectsArray[i].id);
-			//console.log(jsonObjectsArray[i].date);
-
 			for (var key in jsonObjectsArray[i]) {
 				console.log(key);
+                console.log(' name=' + key + ' value=' + jsonObjectsArray[i][key]);
 			}
-		 
 		}
 
 	</script>
