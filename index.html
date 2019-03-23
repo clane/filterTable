@@ -8,34 +8,45 @@
     </style>
   </head>
   <body>
+
     <section id="content">
     </section>
 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 
+	<script>
+		let url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
+		let jsonObjectsArray = [];
+		$.ajax({
+		  type: 'GET',
+		  url: url,
+		  dataType: 'json',
+		  success: function(data) { jsonObjectsArray = data;},
+		  async: false
+		});
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+		//console.log(jsonObjectsArray);
 
-<script>
-var url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
-var jsonObjectsArray = [];
-$.ajax({
-  type: 'GET',
-  url: url,
-  dataType: 'json',
-  success: function(data) { jsonObjectsArray = data;},
-  async: false
-});
+		let data = { 'tableData': jsonObjectsArray }; 
+		console.log(data); 
 
-console.log(jsonObjectsArray);
+		for (var key in data) {
+		   console.log(key);
+		}
 
-for(let i = 0; i < jsonObjectsArray.length; i++) {
+		for(let i = 0; i < jsonObjectsArray.length; i++) {
 
-console.log(jsonObjectsArray[i]);
+			//console.log(jsonObjectsArray[i]);
+			//console.log(jsonObjectsArray[i].id);
+			//console.log(jsonObjectsArray[i].date);
 
-}
+			for (var key in jsonObjectsArray[i]) {
+				console.log(key);
+			}
+		 
+		}
 
-</script>
-
+	</script>
 
   </body>
 </html>
