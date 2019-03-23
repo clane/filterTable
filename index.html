@@ -5,6 +5,7 @@
     <title>example</title>
     <style>
       #content { width:960px; margin:auto; } 
+	  tab
     </style>
   </head>
   <body>
@@ -17,7 +18,8 @@
 	<script>
 		let url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
 		let jsonObjectsArray = [];
-		let htmlString = "<table border='1'>";
+		let htmlString = "<table>";
+        let container = document.getElementById('content');
 
 		$.ajax({
 		  type: 'GET',
@@ -27,21 +29,28 @@
 		  async: false
 		});
 
+        //headers
+	    htmlString += '<tr>';
+		for (let key in jsonObjectsArray[0]) {
+			htmlString += '<th>';
+            htmlString += key; 
+			htmlString += '</th>';
+		}
+		htmlString += '</tr>';
+
+        //Rows
 		for(let i = 0; i < jsonObjectsArray.length; i++) {
-			for (var key in jsonObjectsArray[i]) {
-				console.log(key);
-                console.log(' name=' + key + ' value=' + jsonObjectsArray[i][key]);
-				htmlString += '<tr>';
-				htmlString += '<th>';
-                htmlString += key; 
-				htmlString += '</th>';
-				htmlString += '</tr>';
-		
-			}
+	    	htmlString += '<tr>';		
+		    for (let key in jsonObjectsArray[i]) {
+	    		htmlString += '<td>';		
+	    		htmlString += jsonObjectsArray[i][key];		
+	    		htmlString += '</td>';		
+            }		
+	    	htmlString += '</tr>';		
 		}
 
 		htmlString += "</table>";
-        console.log(htmlString); 
+        $('#content').html(htmlString);
 
 	</script>
 
