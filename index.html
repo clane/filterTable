@@ -41,6 +41,10 @@
 			for (let key in jsonObjectsArray[0]) {
 				htmlString += '<th>';
 				htmlString += key; 
+				htmlString += '<button>';		
+				htmlString += 'sort';		
+				htmlString += '</button>';		
+
 				htmlString += '</th>';
 			}
 			htmlString += '</tr>';
@@ -51,7 +55,7 @@
 				for (let key in jsonObjectsArray[i]) {
 					htmlString += '<td>';		
 					htmlString += jsonObjectsArray[i][key];		
-					htmlString += '</td>';		
+										htmlString += '</td>';		
 				}		
 				htmlString += '</tr>';		
 			}
