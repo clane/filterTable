@@ -17,6 +17,8 @@
 	<script>
 		let url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
 		let jsonObjectsArray = [];
+		let htmlString = "<table border='1'>";
+
 		$.ajax({
 		  type: 'GET',
 		  url: url,
@@ -29,8 +31,17 @@
 			for (var key in jsonObjectsArray[i]) {
 				console.log(key);
                 console.log(' name=' + key + ' value=' + jsonObjectsArray[i][key]);
+				htmlString += '<tr>';
+				htmlString += '<th>';
+                htmlString += key; 
+				htmlString += '</th>';
+				htmlString += '</tr>';
+		
 			}
 		}
+
+		htmlString += "</table>";
+        console.log(htmlString); 
 
 	</script>
 
