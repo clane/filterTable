@@ -15,7 +15,7 @@ $dbname = 'clane_BDS';
      exit();
   }
 
-  $result = $dblink->query("SELECT DISTINCT id FROM gigs");
+  $result = $dblink->query("SELECT * FROM gigs");
 
 //Initialize array variable
   $dbdata = array();
