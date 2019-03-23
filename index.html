@@ -11,46 +11,53 @@
   <body>
 
     <section id="content">
+		<h1>A11Y Grid</h1> 
+		<section id="tableContainer">
+		</section>
     </section>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 
 	<script>
-		let url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
-		let jsonObjectsArray = [];
-		let htmlString = "<table>";
-        let container = document.getElementById('content');
 
-		$.ajax({
-		  type: 'GET',
-		  url: url,
-		  dataType: 'json',
-		  success: function(data) { jsonObjectsArray = data;},
-		  async: false
-		});
+    	(function createTable(){
 
-        //headers
-	    htmlString += '<tr>';
-		for (let key in jsonObjectsArray[0]) {
-			htmlString += '<th>';
-            htmlString += key; 
-			htmlString += '</th>';
-		}
-		htmlString += '</tr>';
+			let url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
+			let jsonObjectsArray = [];
+			let htmlString = "<table>";
 
-        //Rows
-		for(let i = 0; i < jsonObjectsArray.length; i++) {
-	    	htmlString += '<tr>';		
-		    for (let key in jsonObjectsArray[i]) {
-	    		htmlString += '<td>';		
-	    		htmlString += jsonObjectsArray[i][key];		
-	    		htmlString += '</td>';		
-            }		
-	    	htmlString += '</tr>';		
-		}
+			$.ajax({
+			  type: 'GET',
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
 
-		htmlString += "</table>";
-        $('#content').html(htmlString);
+			//headers
+			htmlString += '<tr>';
+			for (let key in jsonObjectsArray[0]) {
+				htmlString += '<th>';
+				htmlString += key; 
+				htmlString += '</th>';
+			}
+			htmlString += '</tr>';
+
+			//Rows
+			for(let i = 0; i < jsonObjectsArray.length; i++) {
+				htmlString += '<tr>';		
+				for (let key in jsonObjectsArray[i]) {
+					htmlString += '<td>';		
+					htmlString += jsonObjectsArray[i][key];		
+					htmlString += '</td>';		
+				}		
+				htmlString += '</tr>';		
+			}
+
+			htmlString += "</table>";
+			$('#tableContainer').html(htmlString);
+
+		})() 
 
 	</script>
 
