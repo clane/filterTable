@@ -5,6 +5,7 @@ $dbhost = 'localhost';
 $dbuser = 'clane359';
 $dbpass = 'FnAlt0169';
 $dbname = 'clane_BDS';
+$table = 'gigs';
 
 //Create database connection
   $dblink = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
