@@ -2,11 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>example</title>
+    <title>A11Y Filter Table</title>
     <style>
     	#content { width:960px; margin:auto; } 
     	table, th, td { border-collapse: collapse; border:2px solid #000; padding:5px; text-align:left; vertical-align:top; } 
  	  	button {  border:2px solid #000; border-radius:10px; padding:10px; font-size:1rem; margin-bottom:10px; } 
+
+        
+		.offscreenText {
+			position: absolute;
+			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+			clip: rect(1px, 1px, 1px, 1px);
+			clip-path: inset(50%);
+			padding: 0;
+			border: 0;
+			height: 1px; 
+			width: 1px; 
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+
     </style>
   </head>
   <body>
@@ -18,15 +34,15 @@
 		</section>
     </section>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script>
-
+    
     	function createTable(){
             console.log('in createTable'); 
 			let url = './getTableJSON.php';
+			let htmlString;
 			let jsonObjectsArray = [];
-			let htmlString = "<table>";
 
 			$.ajax({
 			  type: 'GET',
@@ -36,31 +52,28 @@
 			  async: false
 			});
 
-			//headers
+
+            htmlString = '<table>';
 			htmlString += '<tr>';
 			for (let key in jsonObjectsArray[0]) {
 				htmlString += '<th>';
 				htmlString += key; 
-				htmlString += '<button>';		
-				htmlString += 'sort';		
-				htmlString += '</button>';		
-
 				htmlString += '</th>';
 			}
 			htmlString += '</tr>';
 
-			//Rows
 			for(let i = 0; i < jsonObjectsArray.length; i++) {
 				htmlString += '<tr>';		
 				for (let key in jsonObjectsArray[i]) {
 					htmlString += '<td>';		
 					htmlString += jsonObjectsArray[i][key];		
-										htmlString += '</td>';		
+					htmlString += '</td>';		
 				}		
 				htmlString += '</tr>';		
 			}
 
 			htmlString += "</table>";
+
 			$('#tableContainer').html(htmlString);
 
 		}
