@@ -9,8 +9,28 @@
   </head>
   <body>
     <section id="content">
-      <p>Content goes here</p>
     </section>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+
+<script>
+var url = 'http://chrislane.info/examples/filterTable/getTableJSON.php';
+var jsonObjectsArray = [];
+$.ajax({
+  type: 'GET',
+  url: url,
+  dataType: 'json',
+  success: function(data) { jsonObjectsArray = data;},
+  async: false
+});
+
+console.log(jsonObjectsArray);
+
+</script>
+
+
   </body>
 </html>
 
