@@ -58,7 +58,7 @@
 			for (let key in jsonObjectsArray[0]) {
 
 				sortButtonsHtmlString += '<form action="./sortTableJSON.php" method="post">';
-				sortButtonsHtmlString += '<button name="label' + 'value="key"'  + '_ascending_button' + '>';
+				sortButtonsHtmlString += '<button name="label"' + ' value="' + key + '_ascending_button' + '">';
 				sortButtonsHtmlString += key; 
 				sortButtonsHtmlString += '<span class="sortArrow">'; 
 				sortButtonsHtmlString += '&uarr;'; 
@@ -67,7 +67,7 @@
 				sortButtonsHtmlString += 'sort ascending '; 
 				sortButtonsHtmlString += '</span>'; 
 				sortButtonsHtmlString += '</button>';
-				sortButtonsHtmlString += '<button name= ' + key + '_descending_button' + '>';
+				sortButtonsHtmlString += '<button name="label"' + ' value="' + key + '_descending_button' + '">';
                 sortButtonsHtmlString += key; 
 				sortButtonsHtmlString += '<span class="sortArrow">'; 
 				sortButtonsHtmlString += '&darr;'; 
