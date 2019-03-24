@@ -1,6 +1,5 @@
 <?php
 
-
 foreach($_POST as $key => $value) {
     if (strpos($key, 'substring_')>=0) {
         // value starts with substring_
@@ -12,9 +11,16 @@ foreach($_POST as $key => $value) {
 
 include 'dbVars.php';
 
-$columns = '*';
-$orderByColumns = "id"; 
-$sortDirection = 'asc';
+if($_POST['id_descending_button'] == 'activated'){
+	$columns = 'id';
+	$orderByColumns = "id"; 
+	$sortDirection = 'DESC';
+} else {
+	$columns = 'id';
+	$orderByColumns = "id"; 
+	$sortDirection = 'ASC';
+} 
+
 $query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
 $result = $dblink->query($query);
 
@@ -28,6 +34,8 @@ while ( $row = $result->fetch_assoc())  {
 
 //Print array in JSON format
  echo json_encode($dbdata);
+
+
  
 ?>
 
