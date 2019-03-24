@@ -3,20 +3,22 @@
 foreach($_POST as $key => $value) {
     if (strpos($key, 'substring_')>=0) {
         // value starts with substring_
-                echo $key;
-				echo ' ';
-                echo $value;
+        echo $key;
+		echo ' ';
+        echo $value;
     }
 }
 
 include 'dbVars.php';
 
 if($_POST['id_descending_button'] == 'activated'){
-	$columns = 'id';
+	//$columns = 'id';
+	$columns = '*';
 	$orderByColumns = "id"; 
 	$sortDirection = 'DESC';
 } else {
-	$columns = 'id';
+	//$columns = 'id';
+	$columns = '*';
 	$orderByColumns = "id"; 
 	$sortDirection = 'ASC';
 } 
