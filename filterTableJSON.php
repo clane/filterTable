@@ -16,7 +16,11 @@ if ($dblink->connect_errno) {
    exit();
 }
 
-$result = $dblink->query("SELECT * FROM $table");
+$fieldToOrderby = 'id';
+$orderByDirection = 'DESC';
+//$query = "SELECT * FROM $table ORDER BY $fieldToOrderby $orderByDirection";
+$query = "SELECT id FROM $table ORDER BY $fieldToOrderby $orderByDirection";
+$result = $dblink->query($query);
 
 //Initialize array variable
 $dbdata = array();
