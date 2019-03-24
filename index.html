@@ -41,12 +41,10 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script>
-    
-    	function createTable(){
+
+		function getData(){
 			let url = './getTableJSON.php';
-			let tableHtmlString;
 			let jsonObjectsArray = [];
-			let	sortButtonsHtmlString = ''; 
 			$.ajax({
 			  type: 'GET',
 			  url: url,
@@ -54,7 +52,17 @@
 			  success: function(data) { jsonObjectsArray = data;},
 			  async: false
 			});
-           
+
+			return jsonObjectsArray;
+
+		}
+    
+    	function createTable(){
+
+			let jsonObjectsArray = getData(); 
+			let	sortButtonsHtmlString = ''; 
+			let tableHtmlString;
+		           
 			for (let key in jsonObjectsArray[0]) {
 
 				sortButtonsHtmlString += '<form action="./sortTableJSON.php" method="post">';
