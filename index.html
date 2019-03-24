@@ -56,16 +56,19 @@
 			return jsonObjectsArray;
 
 		}
-    
-    	function createTable(){
-
+   
+	    function init(){
 			let jsonObjectsArray = getData(); 
+			createTable(jsonObjectsArray);
+		}
+
+ 
+    	function createTable(jsonObjectsArray){
+
 			let	sortButtonsHtmlString = ''; 
 			let tableHtmlString;
 		           
 			for (let key in jsonObjectsArray[0]) {
-
-				sortButtonsHtmlString += '<form action="./getTableJSON.php" method="post">';
 				sortButtonsHtmlString += '<button name="' + key + '_ascending_button" value="activated">';
 				sortButtonsHtmlString += key; 
 				sortButtonsHtmlString += '<span class="sortArrow">'; 
@@ -85,7 +88,6 @@
 				sortButtonsHtmlString += 'sort descending '; 
 				sortButtonsHtmlString += '</span>'; 
 				sortButtonsHtmlString += '</button>';
-				sortButtonsHtmlString += '</form>';
 			}
 			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
 
@@ -114,7 +116,7 @@
 
 		}
 		
-		createTable();  
+		init();  
 
 		$('#refreshTableButton').click(function(){ createTable();}); 
 
