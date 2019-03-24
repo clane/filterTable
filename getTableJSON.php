@@ -12,7 +12,10 @@ foreach($_POST as $key => $value) {
 
 include 'dbVars.php';
 
-$query = "SELECT * FROM $table";
+$columns = '*';
+$orderByColumns = "id"; 
+$sortDirection = 'asc';
+$query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
 $result = $dblink->query($query);
 
 //Initialize array variable
