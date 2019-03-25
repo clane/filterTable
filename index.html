@@ -72,7 +72,7 @@
 		}
 
 	    function sort(e){
-			console.log('in sort'); 	
+
 			let buttonName, buttonValue;
 
 			//to make it work with the keyboard
@@ -85,9 +85,6 @@
 				buttonName=e.target.parentNode.name;
 				buttonValue=e.target.parentNode.value;
 			}
-			
-			console.log(buttonName);
-			console.log(buttonValue);
 
         	let jsonObjectsArray = postDataForSort(buttonName,buttonValue); 
 			createTable(jsonObjectsArray);
