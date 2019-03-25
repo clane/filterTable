@@ -52,8 +52,8 @@
 
 		}
 
-   		function postDataForSort(buttonName,buttonValue){
-			let url = './getTableJSON.php';
+   		function postDataForSort(buttonName){
+			let url = './getTableJSON.php?buttonName=' + buttonName;
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: 'POST',
@@ -73,20 +73,19 @@
 
 	    function sort(e){
 
-			let buttonName, buttonValue;
+			let buttonName;
 
 			//to make it work with the keyboard
 			if(e.target.nodeName === 'BUTTON') {
 				buttonName=e.target.name;
-				buttonValue=e.target.value;
 			} 
 			//to make it work with the mouse
 			if(e.target.nodeName === 'SPAN') {
 				buttonName=e.target.parentNode.name;
-				buttonValue=e.target.parentNode.value;
 			}
 
-        	let jsonObjectsArray = postDataForSort(buttonName,buttonValue); 
+        	let jsonObjectsArray = postDataForSort(buttonName); 
+			console.log(jsonObjectsArray); 
 			createTable(jsonObjectsArray);
 
 		} 

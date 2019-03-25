@@ -11,17 +11,9 @@ foreach($_POST as $key => $value) {
 
 include 'dbVars.php';
 
-if($_POST['id_descending_button'] == 'activated'){
-	//$columns = 'id';
 	$columns = '*';
 	$orderByColumns = "id"; 
 	$sortDirection = 'DESC';
-} else {
-	//$columns = 'id';
-	$columns = '*';
-	$orderByColumns = "id"; 
-	$sortDirection = 'ASC';
-} 
 
 $query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
 $result = $dblink->query($query);
