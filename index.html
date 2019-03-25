@@ -52,7 +52,7 @@
 
 		}
 
-   		function postData(){
+   		function postDataForSort(buttonName,buttonValue){
 			let url = './getTableJSON.php';
 			let jsonObjectsArray = [];
 			$.ajax({
@@ -73,15 +73,25 @@
 
 	    function sort(e){
 			console.log('in sort'); 	
-			console.log(e.target.nodeName);		
-			console.log(e.target.name);		
-			console.log(e.target.value);		
 			let buttonName, buttonValue;
+
+			//to make it work with the keyboard
 			if(e.target.nodeName === 'BUTTON') {
 				buttonName=e.target.name;
 				buttonValue=e.target.value;
 			} 
+			//to make it work with the mouse
+			if(e.target.nodeName === 'SPAN') {
+				buttonName=e.target.parentNode.name;
+				buttonValue=e.target.parentNode.value;
+			}
 			
+			console.log(buttonName);
+			console.log(buttonValue);
+
+        	let jsonObjectsArray = postDataForSort(buttonName,buttonValue); 
+			createTable(jsonObjectsArray);
+
 		} 
  
     	function createTable(jsonObjectsArray){
