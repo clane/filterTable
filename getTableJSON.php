@@ -1,19 +1,14 @@
 <?php
 
-foreach($_POST as $key => $value) {
-    if (strpos($key, 'substring_')>=0) {
-        // value starts with substring_
-        echo $key;
-		echo ' ';
-        echo $value;
-    }
+include 'dbVars.php';
+$columns = 'id';
+$orderByColumns = "id"; 
+$sortDirection = 'ASC';
+
+if($_GET['buttonName'] === 'id_descending_button') { 
+$sortDirection = 'DESC';
 }
 
-include 'dbVars.php';
-
-	$columns = '*';
-	$orderByColumns = "id"; 
-	$sortDirection = 'DESC';
 
 $query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
 $result = $dblink->query($query);

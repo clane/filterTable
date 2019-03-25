@@ -56,7 +56,7 @@
 			let url = './getTableJSON.php?buttonName=' + buttonName;
 			let jsonObjectsArray = [];
 			$.ajax({
-			  type: 'POST',
+			  type: "GET",
 			  url: url,
 			  dataType: 'json',
 			  success: function(data) { jsonObjectsArray = data;},
