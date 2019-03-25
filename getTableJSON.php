@@ -1,7 +1,7 @@
 <?php
 
 include 'dbVars.php';
-$columns = 'id';
+$columns = '*';
 $orderByColumns = "id"; 
 $sortDirection = 'ASC';
 
