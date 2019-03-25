@@ -8,7 +8,7 @@
 		h1 { font-size:3rem; } 
     	table, th, td { border-collapse: collapse; border:2px solid #000; padding:5px; text-align:left; vertical-align:top; } 
 
-        #sortButtonsHtmlStringContainer label { margin-left:5px; font-size:1.8rem; display:block;  }  
+        #sortButtonsHtmlStringContainer label { margin-left:5px; font-size:1.8rem; }  
 		.offscreenText {
 			position: absolute;
 			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
@@ -74,25 +74,29 @@
 		}
 	    function init(){
 			let jsonObjectsArray = getData(); 
+		    createSortControls(jsonObjectsArray);  
 			createTable(jsonObjectsArray);
 		}
 
 	    function sort(e){
-            id="id_descending";  
-        	let jsonObjectsArray = getDataForSort(id); 
+			console.log(e.target);
+			console.log(e.target.id);
+			console.log(e.target.checked);
+        	let jsonObjectsArray = getDataForSort(e.target.id); 
 			createTable(jsonObjectsArray);
-
+			e.target.checked = true;
+            let el = document.getElementById(e.target.id);
+			el.checked = true;
 		} 
- 
-    	function createTable(jsonObjectsArray){
 
+		function createSortControls(jsonObjectsArray) {
 			let	sortButtonsHtmlString = ''; 
 			let tableHtmlString;
 		           
 			for (let key in jsonObjectsArray[0]) {
 
 				//sort ascending radio buttons
-				sortButtonsHtmlString += '<div class="radioPair">';
+				sortButtonsHtmlString += '<div class="radioPair" role="radiogroup" aria-label="' + key + '">';
 				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_ascending">';
 				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
 				sortButtonsHtmlString += 'sort '; 
@@ -105,7 +109,7 @@
 
 
 				//sort descending radio buttons
-				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_ascending">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_descending">';
 				sortButtonsHtmlString += '<label for="' + key + '_descending">';
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
@@ -118,12 +122,14 @@
 
 			}
 
-			sortButtonsHtmlString += '<button id="sortButton">Sort</button>'; 
-
 			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
-			$('#sortButton').click((e)=>{sort(e)});
+			$('#sortButtonsHtmlStringContainer input[type="radio"]').click((e)=>{sort(e)});
 
-			
+
+		}
+
+ 
+    	function createTable(jsonObjectsArray){
 
             tableHtmlString = '<table>';
 			tableHtmlString += '<tr>';
