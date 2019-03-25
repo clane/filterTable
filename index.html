@@ -6,7 +6,7 @@
     <style>
     	#content { width:960px; margin:auto; } 
     	table, th, td { border-collapse: collapse; border:2px solid #000; padding:5px; text-align:left; vertical-align:top; } 
- 	  	button {  border:3px solid #000; border-radius:10px; padding:10px; font-size:1.5rem; font-weight:bold; margin-bottom:10px; display:inline-block; margin-right:10px; } 
+ 	  	input[type="radio"] {  font-size:1.5rem; } 
 
         #sortButtonsHtmlStringContainer {}  
 		.offscreenText {
@@ -23,6 +23,7 @@
 		}
 		.sortArrow { font-size:2rem; font-weight:bold; } 
 
+        #sortButton { font-weight:bold; font-size:2rem; display:block; border-radius:10px; margin:10px auto; border:3px solid #000; } 
 
     </style>
   </head>
@@ -52,8 +53,8 @@
 
 		}
 
-   		function getDataForSort(buttonName){
-			let url = './getTableJSON.php?buttonName=' + buttonName;
+   		function getDataForSort(id){
+			let url = './getTableJSON.php?id=' + id;
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: "GET",
@@ -72,20 +73,8 @@
 		}
 
 	    function sort(e){
-
-			let buttonName;
-
-			//to make it work with the keyboard
-			if(e.target.nodeName === 'BUTTON') {
-				buttonName=e.target.name;
-			} 
-			//to make it work with the mouse
-			if(e.target.nodeName === 'SPAN') {
-				buttonName=e.target.parentNode.name;
-			}
-
-        	let jsonObjectsArray = getDataForSort(buttonName); 
-			console.log(jsonObjectsArray); 
+            id="id_descending";  
+        	let jsonObjectsArray = getDataForSort(id); 
 			createTable(jsonObjectsArray);
 
 		} 
@@ -96,7 +85,8 @@
 			let tableHtmlString;
 		           
 			for (let key in jsonObjectsArray[0]) {
-				sortButtonsHtmlString += '<button name="' + key + '_ascending_button" value="activated">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_ascending">';
+				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
 				sortButtonsHtmlString += '<span>'; 
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += '</span>'; 
@@ -108,9 +98,11 @@
 				sortButtonsHtmlString += '<span class="offscreenText">'; 
 				sortButtonsHtmlString += 'sort ascending '; 
 				sortButtonsHtmlString += '</span>'; 
-				sortButtonsHtmlString += '</button>';
+				sortButtonsHtmlString += '</label>'; 
 
-				sortButtonsHtmlString += '<button name="' + key + '_descending_button" value="activated">';
+
+
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_descending">';
 				sortButtonsHtmlString += '<span>'; 
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += '</span>'; 
@@ -123,10 +115,14 @@
 				sortButtonsHtmlString += '<span class="offscreenText">'; 
 				sortButtonsHtmlString += 'sort descending '; 
 				sortButtonsHtmlString += '</span>'; 
-				sortButtonsHtmlString += '</button>';
 			}
+
+			sortButtonsHtmlString += '<button id="sortButton">Sort</bottom>'; 
+
 			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
-			$('#sortButtonsHtmlStringContainer button').click((e)=>{sort(e)});
+			$('#sortButton').click((e)=>{sort(e)});
+
+			
 
             tableHtmlString = '<table>';
 			tableHtmlString += '<tr>';

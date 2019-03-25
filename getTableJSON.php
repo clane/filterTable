@@ -5,7 +5,7 @@ $columns = '*';
 $orderByColumns = "id"; 
 $sortDirection = 'ASC';
 
-if($_GET['buttonName'] === 'id_descending_button') { 
+if($_GET['id'] === 'id_descending') { 
 $sortDirection = 'DESC';
 }
 
