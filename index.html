@@ -29,12 +29,7 @@
   <body>
 
     <section id="content">
-		<h1>A11Y Grid</h1> 
-		<h2>Sort Buttons</h2>
 		<div id="sortButtonsHtmlStringContainer"></div>
-		<h2>Refresh Button</h2>
-		<button id="refreshTableButton">Refresh Table</button>
-		<h2>Data Table</h2>
 		<section id="tableContainer"></section>
     </section>
 
@@ -56,12 +51,31 @@
 			return jsonObjectsArray;
 
 		}
-   
+
+   		function postData(){
+			let url = './getTableJSON.php';
+			let jsonObjectsArray = [];
+			$.ajax({
+			  type: 'POST',
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+
+			return jsonObjectsArray;
+
+		}
 	    function init(){
 			let jsonObjectsArray = getData(); 
 			createTable(jsonObjectsArray);
 		}
 
+	    function sort(e){
+			console.log('in sort'); 			
+
+			
+		} 
  
     	function createTable(jsonObjectsArray){
 
@@ -90,6 +104,7 @@
 				sortButtonsHtmlString += '</button>';
 			}
 			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
+			$('#sortButtonsHtmlStringContainer button').click((e)=>{sort()});
 
             tableHtmlString = '<table>';
 			tableHtmlString += '<tr>';
@@ -117,8 +132,6 @@
 		}
 		
 		init();  
-
-		$('#refreshTableButton').click(function(){ createTable();}); 
 
 	</script>
 
