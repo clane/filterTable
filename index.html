@@ -96,8 +96,8 @@
 			for (let key in jsonObjectsArray[0]) {
 
 				//sort ascending radio buttons
-				sortButtonsHtmlString += '<div class="radioPair" role="radiogroup" aria-label="' + key + '">';
-				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_ascending">';
+				sortButtonsHtmlString += '<div class="radioPair" role="radiogroup" aria-label="sorting choices for the ' + key + ' column">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'sortcolumn="' + key + '" '  + 'data-sortdirection="ascending"' + ' id="' + key + '_ascending">';
 				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
@@ -109,7 +109,7 @@
 
 
 				//sort descending radio buttons
-				sortButtonsHtmlString += '<input type="radio" name="' + key + '" id="' + key + '_descending">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'sortcolumn="' + key + '" '  + 'data-sortdirection="descending"' + ' id="' + key + '_descending">';
 				sortButtonsHtmlString += '<label for="' + key + '_descending">';
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
