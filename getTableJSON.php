@@ -5,6 +5,10 @@ $columns = '*';
 $orderByColumns = "id"; 
 $sortDirection = 'ASC';
 
+if ($_GET["id"] === 'id_descending') {
+	$sortDirection = 'DESC';
+} 
+
 
 $query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
 $result = $dblink->query($query);
