@@ -2,14 +2,13 @@
 
 	include 'dbVars.php';
 	$columns = '*';
-	$orderByColumns = "id"; 
-	$sortDirection = 'ASC';
+	$orderBy = 'id'; 
 
-	if ($_GET) {
-		$sortDirection = 'DESC';
+	if ($_GET['orderby']) {
+		$orderBy = $_GET['orderby']; 
 	}
 
-	$query = "SELECT $columns FROM $table ORDER BY $orderByColumns $sortDirection";
+	$query = "SELECT $columns FROM $table ORDER BY $orderBy";
 	$result = $dblink->query($query);
 
 	//Initialize array variable

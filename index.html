@@ -8,7 +8,7 @@
 		h1 { font-size:3rem; } 
     	table, th, td { border-collapse: collapse; border:2px solid #000; padding:5px; text-align:left; vertical-align:top; } 
 
-        #sortButtonsHtmlStringContainer label { margin-left:5px; font-size:1.8rem; }  
+        #sortButtons label { margin-left:5px; font-size:1.8rem; }  
 		.offscreenText {
 			position: absolute;
 			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
@@ -21,12 +21,11 @@
 			overflow: hidden;
 			white-space: nowrap;
 		}
-		.sortArrow { font-size:2rem; font-weight:bold; } 
-
-        #sortButton { font-weight:bold; font-size:5rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; } 
-
-		.radioPair { display:inline-block; margin:5px 5px; border:2px solid #000; border-radius:10px; padding:5px; } 
+		
+		.sortRadio { border:1px solid #000; display:inline-block; padding:10px; margin:10px 10px; } 
+        #sortButton { font-weight:bold; font-size:3rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
 		input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
+
     </style>
   </head>
   <body>
@@ -34,7 +33,7 @@
     <section id="content">
 		<h1>Filter Table</h1>
 		<h2>Column Sorting Controls</h2>
-		<div id="sortButtonsHtmlStringContainer"></div>
+		<div id="sortButtons"></div>
 		<h2>Table</h2>
 		<section id="tableContainer"></section>
     </section>
@@ -79,14 +78,12 @@
 		}
 
 	    function sort(e){
-			console.log('in sort()'); 
 			let sortColumn, sortDirection;
 			let orderBy = '';
          
-            let numChecked = $("#sortButtonsHtmlStringContainer input[type=radio]:checked").length;
-            console.log(numChecked);
+            let numChecked = $("#sortButtons input[type=radio]:checked").length;
 			let checkedCnt = 0;  
-            $("#sortButtonsHtmlStringContainer input[type=radio]:checked").each(function() {    checkedCnt++; 
+            $("#sortButtons input[type=radio]:checked").each(function() {    checkedCnt++; 
 				sortColumn  = $(this).attr('data-sortcolumn'); 
 				sortDirection = $(this).attr('data-sortdirection');
 				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
@@ -96,8 +93,6 @@
 				
             });
 
-			console.log(orderBy); 
-
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
 		} 
@@ -106,28 +101,34 @@
 			let	sortButtonsHtmlString = ''; 
 			let tableHtmlString;
 		           
+			sortButtonsHtmlString += '<div role="radiogroup" aria-label="sorting choices">';
 			for (let key in jsonObjectsArray[0]) {
 
 				//sort ascending radio buttons
-				sortButtonsHtmlString += '<div class="radioPair" role="radiogroup" aria-label="sorting choices for the ' + key + ' column">';
+				sortButtonsHtmlString += '<div class="sortRadio">';
 				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="ASC"' + ' id="' + key + '_ascending">';
 				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
-				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
+				sortButtonsHtmlString += '<span class="offscreenText">'; 
+				sortButtonsHtmlString += 'sort'; 
 				sortButtonsHtmlString += ' ascending'; 
-				sortButtonsHtmlString += '<span class="sortArrow">'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '<span class="sortArrow" aria-hidden="true">'; 
 				sortButtonsHtmlString += '&uarr;'; 
 				sortButtonsHtmlString += '</span>'; 
-				sortButtonsHtmlString += '</label>'; 
-
+				sortButtonsHtmlString += '</label>';
+				sortButtonsHtmlString += '</div>';
 
 				//sort descending radio buttons
+				sortButtonsHtmlString += '<div class="sortRadio">';
 				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="DESC"' + ' id="' + key + '_descending">';
 				sortButtonsHtmlString += '<label for="' + key + '_descending">';
-				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
+				sortButtonsHtmlString += '<span class="offscreenText">'; 
+				sortButtonsHtmlString += 'sort'; 
 				sortButtonsHtmlString += ' descending'; 
-				sortButtonsHtmlString += '<span class="sortArrow">'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '<span class="sortArrow" aria-hidden="true">'; 
 				sortButtonsHtmlString += '&darr;'; 
 				sortButtonsHtmlString += '</span>'; 
 				sortButtonsHtmlString += '</label>'; 
@@ -135,10 +136,11 @@
 
 			}
 
+			sortButtonsHtmlString += '</div>';
 		    	
 			sortButtonsHtmlString += '<button id="sortButton">Sort</button>';
 
-			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
+			$('#sortButtons').html(sortButtonsHtmlString);
 			$('#sortButton').click((e)=>{sort(e)});
 
 
