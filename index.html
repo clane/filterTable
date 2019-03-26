@@ -26,6 +26,7 @@
 		.sortRadio { border:1px solid #000; display:inline-block; padding:10px; margin:10px 10px;  border-radius:5px; } 
         #sortButton { font-weight:bold; font-size:3rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
 		input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
+		#status { border:1px solid #000; width:20%; padding:20px; border-radius:5px;  } 
 
     </style>
   </head>
@@ -33,10 +34,16 @@
 
     <section id="content">
 		<h1>Filter Table</h1>
+
+		<h2>Input Form</h2>
+		<div id="inputFormContainer"></div>
+
 		<h2>Column Sorting Controls</h2>
 		<div id="sortButtons"></div>
+
 		<h2>Table</h2>
 		<section id="tableContainer"></section>
+
     </section>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -74,6 +81,7 @@
 		}
 	    function init(){
 			let jsonObjectsArray = getData(); 
+			createInputForm(jsonObjectsArray); 
 		    createSortControls(jsonObjectsArray);  
 			createTable(jsonObjectsArray);
 		}
@@ -92,6 +100,13 @@
             $('#status').text('now sorting by' + orderBy); 
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
+		} 
+
+		function createInputForm(jsonObjectsArray) {
+			let inputForm = '';	
+			inputForm += '<form>';
+			inputForm += '</form>';
+			$('#inputFormContainer').html(inputForm);
 		} 
 
 		function createSortControls(jsonObjectsArray) {
@@ -135,7 +150,7 @@
 			}
 
 			sortButtonsHtmlString += '</div>';
-			sortButtonsHtmlString += '<h3>status</h3>';
+			sortButtonsHtmlString += '<h3>Sort Status</h3>';
 			sortButtonsHtmlString += '<div id="status" aria-live="polite"></div>';
 		    	
 
