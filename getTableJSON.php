@@ -2,7 +2,7 @@
 
 	include 'dbVars.php';
 	$columns = '*';
-	$orderBy = 'id'; 
+	$orderBy = 'id DESC'; 
 
 	if ($_GET['orderby']) {
 		$orderBy = $_GET['orderby']; 
