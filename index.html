@@ -123,15 +123,20 @@
 			inputForm += '<form action="./insert.php" method="post">';
 			
 			for (let key in jsonObjectsArray[0]) {
-				if(key !== 'id'){
 					let id = key + '_input';
 					inputForm += '<div>';
-					inputForm += '<label for="' + id + '"' + '>';
-					inputForm += key + ':';
-					inputForm += '</label>';
-					inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+					if(key !== 'id'){
+						inputForm += '<label for="' + id + '"' + '>';
+						inputForm += key + ':';
+						inputForm += '</label>';
+					}
+					if(key === 'id'){
+						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
+					} else {
+						inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+					} 
 					inputForm += '</div>';
-				} 
+
 			} 
             inputForm += '<input type="submit" value="Submit">'; 
 			inputForm += '</form>';

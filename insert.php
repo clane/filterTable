@@ -1,16 +1,18 @@
 <?php
 
+//echo "<pre>"; print_r($_POST) ;  echo "</pre>";
 
-echo "<pre>"; print_r($_POST) ;  echo "</pre>";
+echo $_POST['id'];
+echo $_POST['description'];
+echo $_POST['title'];
+echo $_POST['status'];
+echo $_POST['priority'];
 
-
-/*
-	include 'dbVars.php';
-
-		$query = "INSERT INTO `cards` (`id`, `description`, `title`, `status`, `priority`) VALUES (NULL, 'adadfa', 'tttt', 'afafga', '5')";
-	 	$result = $dblink->query($query);
-
-*/ 
+$description =  $_POST['description'];
+include 'dbVars.php';
+$query =  "INSERT INTO $table (`id`, `description`, `title`, `status`, `priority`) VALUES (NULL, '$description', 'test', 'test', 5)";
+$result = $dblink->query($query);
+echo $result;
 
 ?>
 
