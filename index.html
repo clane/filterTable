@@ -23,7 +23,7 @@
 		}
 		.sortArrow { font-size:2rem; font-weight:bold; } 
 
-        #sortButton { font-weight:bold; font-size:5rem; display:inline-block; border-radius:10px; margin:10px 10px; border:3px solid #000; } 
+        #sortButton { font-weight:bold; font-size:5rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; } 
 
 		.radioPair { display:inline-block; margin:5px 5px; border:2px solid #000; border-radius:10px; padding:5px; } 
 		input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
@@ -58,8 +58,8 @@
 
 		}
 
-   		function getDataForSort(id){
-			let url = './getTableJSON.php?id=' + id;
+   		function getDataForSort(orderBy){
+			let url = './getTableJSON.php?orderby=' + orderBy;
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: "GET",
@@ -98,10 +98,8 @@
 
 			console.log(orderBy); 
 
-			/*
-        	let jsonObjectsArray = getDataForSort(e.target.id); 
+        	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
-			*/
 		} 
 
 		function createSortControls(jsonObjectsArray) {
