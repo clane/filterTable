@@ -79,14 +79,29 @@
 		}
 
 	    function sort(e){
-			console.log(e.target);
-			console.log(e.target.id);
-			console.log(e.target.checked);
+			console.log('in sort()'); 
+			let sortColumn, sortDirection;
+			let orderBy = '';
+         
+            let numChecked = $("#sortButtonsHtmlStringContainer input[type=radio]:checked").length;
+            console.log(numChecked);
+			let checkedCnt = 0;  
+            $("#sortButtonsHtmlStringContainer input[type=radio]:checked").each(function() {    checkedCnt++; 
+				sortColumn  = $(this).attr('data-sortcolumn'); 
+				sortDirection = $(this).attr('data-sortdirection');
+				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
+				if(checkedCnt <  numChecked) {
+					orderBy += ', ' ;
+				} 
+				
+            });
+
+			console.log(orderBy); 
+
+			/*
         	let jsonObjectsArray = getDataForSort(e.target.id); 
 			createTable(jsonObjectsArray);
-			e.target.checked = true;
-            let el = document.getElementById(e.target.id);
-			el.checked = true;
+			*/
 		} 
 
 		function createSortControls(jsonObjectsArray) {
@@ -97,7 +112,7 @@
 
 				//sort ascending radio buttons
 				sortButtonsHtmlString += '<div class="radioPair" role="radiogroup" aria-label="sorting choices for the ' + key + ' column">';
-				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'sortcolumn="' + key + '" '  + 'data-sortdirection="ascending"' + ' id="' + key + '_ascending">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="ASC"' + ' id="' + key + '_ascending">';
 				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
@@ -109,7 +124,7 @@
 
 
 				//sort descending radio buttons
-				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'sortcolumn="' + key + '" '  + 'data-sortdirection="descending"' + ' id="' + key + '_descending">';
+				sortButtonsHtmlString += '<input type="radio" name="' + key + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="DESC"' + ' id="' + key + '_descending">';
 				sortButtonsHtmlString += '<label for="' + key + '_descending">';
 				sortButtonsHtmlString += 'sort '; 
 				sortButtonsHtmlString += key; 
@@ -122,8 +137,11 @@
 
 			}
 
+		    	
+			sortButtonsHtmlString += '<button id="sortButton">Sort</button>';
+
 			$('#sortButtonsHtmlStringContainer').html(sortButtonsHtmlString);
-			$('#sortButtonsHtmlStringContainer input[type="radio"]').click((e)=>{sort(e)});
+			$('#sortButton').click((e)=>{sort(e)});
 
 
 		}
