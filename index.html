@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <title>A11Y Filter Table</title>
     <style>
-		body { background-color:#FBFCFC; color:#1C2833;  } 
-    	#content { width:90%; margin:auto; font-size:1.5rem;  } 
-		h1 { font-size:3rem; } 
-    	table, th, td { border-collapse: collapse; border:2px solid #000; padding:10px; text-align:left; vertical-align:top; } 
 
+		/* BEGIN page level styles */
+		body { background-color:#FBFCFC; color:#1C2833; font-size:2rem;;  } 
+    	#content { width:90%; margin:auto; } 
+		h1 { font-size:3rem; }
+		/* END page level styles */
+
+	    /* BEGIN Input Form */
+		#inputFormContainer label { width:10%; display:inline-block; }
+		#inputFormContainer input { border-radius:5px; }
+	    /* END Input Form */
+  
+		/* BEGIN Table */
+    	table, th, td { border-collapse: collapse; border:2px solid #000; padding:10px; text-align:left; vertical-align:top; } 
+		/* END Table */
+
+        /* BEGIN Sort Controls */ 
         #sortButtons label { margin-left:5px; font-size:1.8rem; }  
 		.offscreenText {
 			position: absolute;
@@ -27,6 +39,10 @@
         #sortButton { font-weight:bold; font-size:3rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
 		input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
 		#status { border:1px solid #000; width:20%; padding:20px; border-radius:5px;  } 
+
+		/* END Sort Controls */ 
+
+
 
     </style>
   </head>
@@ -104,7 +120,19 @@
 
 		function createInputForm(jsonObjectsArray) {
 			let inputForm = '';	
-			inputForm += '<form>';
+			inputForm += '<form action="./insert.php" method="post">';
+			
+			for (let key in jsonObjectsArray[0]) {
+				let id = key + '_input';
+				inputForm += '<div>';
+				inputForm += '<label for="' + id + '"' + '>';
+				inputForm += key + ':';
+				inputForm += '</label>';
+				inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+				inputForm += '</div>';
+				
+			} 
+            inputForm += '<input type="submit" value="Submit">'; 
 			inputForm += '</form>';
 			$('#inputFormContainer').html(inputForm);
 		} 
