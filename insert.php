@@ -9,8 +9,12 @@ echo $_POST['status'];
 echo $_POST['priority'];
 
 $description =  $_POST['description'];
+$title =  $_POST['title'];
+$status =  $_POST['status'];
+$priority =  $_POST['priority'];
+
 include 'dbVars.php';
-$query =  "INSERT INTO $table (`id`, `description`, `title`, `status`, `priority`) VALUES (NULL, '$description', 'test', 'test', 5)";
+$query =  "INSERT INTO $table (`id`, `description`, `title`, `status`, `priority`) VALUES (NULL, '$description', '$title', '$status', $priority)";
 $result = $dblink->query($query);
 echo $result;
 
