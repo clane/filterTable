@@ -9,7 +9,13 @@ include 'dbVars.php';
 $query =  "INSERT INTO $table (`id`, `description`, `title`, `status`, `priority`) VALUES (NULL, '$description', '$title', '$status', $priority)";
 $result = $dblink->query($query);
 
-echo '<a style="display:block; font-size:3rem; margin:20px 20px;" href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
+if($result){
+	echo '<p style="font-size:3rem;margin:20px;">' . 'Success' . '</p>';
+} else {
+	echo '<p style="font-size:3rem;color:red;margin:20px">Error</p>';
+}
+
+echo '<a style="display:block; font-size:3rem; margin:20px;" href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
 
 ?>
 
