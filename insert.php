@@ -17,7 +17,16 @@ if($description && $title && $status && $priority){
 if($result == 1){
 	echo '<p style="font-size:3rem;margin:20px;">' . 'Success' . '</p>';
 } else {
-	echo '<p style="font-size:3rem;color:red;margin:20px">Error</p>';
+	echo '<p style="font-size:2rem;color:red;margin:20px auto;">1 or more errors have occured</p>';
+}
+if(!$description){
+	echo '<p style="font-size:2rem;color:red;margin:10px">Error: missing description</p>';
+}
+if(!$title){
+	echo '<p style="font-size:2rem;color:red;margin:10px">Error: missing title</p>';
+}
+if(!$status){
+	echo '<p style="font-size:2rem;color:red;margin:10px">Error: missing status</p>';
 }
 
 echo '<a style="display:block; font-size:3rem; margin:20px;" href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
