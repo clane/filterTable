@@ -14,6 +14,7 @@
 	    /* BEGIN Input Form */
 		#inputFormContainer label { width:10%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; }
 		#inputFormContainer input { border-radius:5px; height:40px; width:300px; margin:10px auto; }
+		#inputFormContainer select { border-radius:5px; height:40px; width:100px; margin:10px auto; font-size:1.5rem; }
 		#inputFormContainer input[type="submit"]{ border-radius:5px; font-size:2rem; margin:20px auto; padding:10px; height:75px; font-weight:bold; border:2px solid #000;  }
 	    /* END Input Form */
   
@@ -126,7 +127,7 @@
 			for (let key in jsonObjectsArray[0]) {
 					let id = key + '_input';
 					inputForm += '<div>';
-					if(key !== 'id'){
+					if(key !== 'id'&& key !== 'priority'){
 						inputForm += '<label for="' + id + '"' + '>';
 						inputForm += key + ':';
 						inputForm += '</label>';
@@ -134,9 +135,23 @@
 					if(key === 'id'){
 						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
 					} else {
-						inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+						if(key !== 'priority'){
+							inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+						}
 					} 
-					inputForm += '</div>';
+					if(key === 'priority'){
+						inputForm += '<label for="' + id + '"' + '>';
+						inputForm += key + ':';
+						inputForm += '</label>';
+						inputForm += '<select id="' + id + '"' + ' name="' + key + '"' + '>';
+                        inputForm += '<option value="1">1</option>';
+                        inputForm += '<option value="2">2</option>';
+                        inputForm += '<option value="3">3</option>';
+                        inputForm += '<option value="4">4</option>';
+                        inputForm += '<option value="5">5</option>';
+						inputForm += '</select>';
+					}
+				inputForm += '</div>';
 
 			} 
             inputForm += '<input type="submit" value="Submit">'; 
