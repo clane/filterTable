@@ -15,15 +15,14 @@ if ($result = mysqli_query($dblink, $query)) {
 	$fieldValues = array();
 	$fieldNames = array();
 
+	/* Get field information for all columns */
+	$fieldInfo = $result->fetch_fields();
+
+	foreach ($fieldInfo as $fieldInfoValues) {
+		array_push($fieldNames,$fieldInfoValues->name);
+	}
+
 	while ($row = mysqli_fetch_row($result)) {
-
-        /* Get field information for all columns */
-        $fieldInfo = $result->fetch_fields();
-
-        foreach ($fieldInfo as $fieldInfoValues) {
-			array_push($fieldNames,$fieldInfoValues->name);
-        }
-
 		foreach ($row as $value) {
 			array_push($fieldValues,$value);
 		}
@@ -31,15 +30,19 @@ if ($result = mysqli_query($dblink, $query)) {
 
 	}
     /* free result set */
-
-	for ($i = 0; $i < count($fieldValues); $i++) {
-	  echo '<div>';
-	  echo $fieldNames[$i];
-	  echo $fieldValues[$i];
-	  echo '</div>';
-	}
-
     mysqli_free_result($result);
+
+	echo '<table>';
+
+    /* print table headers */
+	echo '<tr>';
+	for ($i = 0; $i < count($fieldValues); $i++) {
+	  echo '<th>';
+	  echo $fieldNames[$i];
+	  echo '</th>';
+	}
+	echo '</tr>';
+	echo '<table>';
 
 }  else {
   		echo("<p>Query Failed: " . $query . "</p>");
