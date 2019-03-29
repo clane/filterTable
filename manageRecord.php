@@ -28,13 +28,17 @@ if ($result = mysqli_query($dblink, $query)) {
 			array_push($fieldValues,$value);
 		}
 
-		for ($i = 0; $i < count($fieldValues); $i++) {
-		  print $fieldNames[$i];
-		  print $fieldValues[$i];
-		}
 
 	}
     /* free result set */
+
+	for ($i = 0; $i < count($fieldValues); $i++) {
+	  echo '<div>';
+	  echo $fieldNames[$i];
+	  echo $fieldValues[$i];
+	  echo '</div>';
+	}
+
     mysqli_free_result($result);
 
 }  else {
