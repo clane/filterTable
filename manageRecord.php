@@ -14,8 +14,8 @@ if ($result = mysqli_query($dblink, $query)) {
 
 	while ($row = mysqli_fetch_row($result)) {
 
-		foreach ($row as $key => $value) {
-			echo "{$key} => {$value} ";
+		foreach ($row as $value) {
+			echo $value;
 		}
 
 	}
