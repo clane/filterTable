@@ -37,10 +37,10 @@ if ($result = mysqli_query($dblink, $query)) {
 	echo '<form>';
 	for ($i = 0; $i < count($fieldValues); $i++) {
       echo '<div>';
-	  echo '<label>';
+	  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
 	  echo $fieldNames[$i];
 	  echo '</label>';
-	  echo '<input type="text" ' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	  echo '<input type="text" ' . 'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
 	  echo '</div>';
 	}
 	echo '</form>';
