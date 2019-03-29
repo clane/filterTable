@@ -3,7 +3,8 @@
 $pageTitle = "Manage Record";
 
 include 'dbVars.php';
-$getId = 1;
+
+$getId = $_GET['id'];;
 
 $pageTitle = 'Managing record id: ' . $getId;
 
@@ -11,7 +12,6 @@ $query =  "SELECT * FROM $table WHERE id = $getId";
 
 /* Select queries return a resultset */
 if ($result = mysqli_query($dblink, $query)) {
-
 
 	$fieldValues = array();
 	$fieldNames = array();
@@ -34,15 +34,21 @@ if ($result = mysqli_query($dblink, $query)) {
     mysqli_free_result($result);
 
 	include 'top.php';
-	echo '<form>';
+	echo '<form action="update.php">';
 	for ($i = 0; $i < count($fieldValues); $i++) {
-      echo '<div>';
-	  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
-	  echo $fieldNames[$i];
-	  echo '</label>';
-	  echo '<input type="text" ' . 'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	  echo '<div>';
+	  if($fieldNames[$i] != 'id'){
+		  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
+		  echo $fieldNames[$i];
+		  echo '</label>';
+		  echo '<input type="text" ' . 'name="' . $fieldNames[$i] . '" '.  'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	  } 
 	  echo '</div>';
 	}
+
+	echo '<div>';
+	echo '<input type="submit" value="Update" />';
+	echo '</div>';
 	echo '</form>';
 
 }  else {
