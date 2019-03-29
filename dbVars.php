@@ -8,7 +8,6 @@ $dbname = 'clane_Kanban';
 $table = 'cards';
 
 
-
 //Create database connection
 $dblink = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 

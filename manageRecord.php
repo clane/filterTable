@@ -3,14 +3,15 @@
 $pageTitle = "Manage Record";
 
 include 'dbVars.php';
-include 'top.php';
+$getId = 1;
 
-$query =  "SELECT * FROM $table";
+$pageTitle = 'Managing record id: ' . $getId;
+
+$query =  "SELECT * FROM $table WHERE id = $getId";
 
 /* Select queries return a resultset */
 if ($result = mysqli_query($dblink, $query)) {
 
-    echo '<p>Query returned '. mysqli_num_rows($result) . ' rows</p>';
 
 	$fieldValues = array();
 	$fieldNames = array();
@@ -32,17 +33,17 @@ if ($result = mysqli_query($dblink, $query)) {
     /* free result set */
     mysqli_free_result($result);
 
-	echo '<table>';
-
-    /* print table headers */
-	echo '<tr>';
+	include 'top.php';
+	echo '<form>';
 	for ($i = 0; $i < count($fieldValues); $i++) {
-	  echo '<th>';
+      echo '<div>';
+	  echo '<label>';
 	  echo $fieldNames[$i];
-	  echo '</th>';
+	  echo '</label>';
+	  echo '<input type="text" ' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	  echo '</div>';
 	}
-	echo '</tr>';
-	echo '<table>';
+	echo '</form>';
 
 }  else {
   		echo("<p>Query Failed: " . $query . "</p>");
