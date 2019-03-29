@@ -12,10 +12,15 @@ if ($result = mysqli_query($dblink, $query)) {
 
     printf("Select returned %d rows.\n", mysqli_num_rows($result));
 
-	while ($row = mysqli_fetch_row($result)) {
+	$fieldValues = array();
 
+	while ($row = mysqli_fetch_row($result)) {
 		foreach ($row as $value) {
-			echo $value;
+			array_push($fieldValues,$value);
+		}
+
+		for ($i = 0; $i < count($fieldValues); $i++) {
+		  print $fieldValues[$i];
 		}
 
 	}
