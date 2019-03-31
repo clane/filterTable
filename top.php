@@ -4,9 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title><?php echo $pageTitle; ?></title>
-		<style>
-			#content { width:30%; margin:50px auto; } 
-		</style>
+		<link rel="stylesheet" href="1.css">
 	</head>
 	<body>
 	<div id="content">
