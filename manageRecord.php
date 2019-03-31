@@ -35,6 +35,7 @@ if ($result = mysqli_query($dblink, $query)) {
 
 	include 'top.php';
 	echo '<form action="update.php" method="post">';
+	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
 	  echo '<div>';
 	  if($fieldNames[$i] != 'id'){
