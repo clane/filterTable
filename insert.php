@@ -13,13 +13,11 @@ $id = 'NULL';
 $query =  "INSERT INTO $table (id, description, title, status, priority) VALUES ('".$id."', '".$description."','".$title."','".$status."','".$priority."')";
 
 // Perform a query, check for error
-if (mysqli_query($dblink, $query))
+if (mysqli_query($dblink, $query) && $description && $title && $status && $priority)
   {
-  echo("Query Succeeded: " . $query);
+  echo("<p>Query Succeeded</p>");
   } else {
-  		echo("<p>Query Failed: " . $query . "</p>");
-  		echo("<p>Error description: " . mysqli_error($dblink) . "</p>");
-
+  		echo("<p>ERROR: Query Failed</p>");
 }
 
 echo '<a style="display:block; font-size:3rem; margin:20px;" href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
