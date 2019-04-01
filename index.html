@@ -79,7 +79,7 @@
 
 		function createInputForm(jsonObjectsArray) {
 			let inputForm = '';	
-			inputForm += '<form action="./insert.php" method="post">';
+			inputForm += '<form action="./insert.php" method="get">';
 			
 			for (let key in jsonObjectsArray[0]) {
 					let id = key + '_input';
@@ -190,7 +190,15 @@
 				tableHtmlString += '<tr>';		
 				for (let key in jsonObjectsArray[i]) {
 					tableHtmlString += '<td>';		
-					tableHtmlString += jsonObjectsArray[i][key];		
+
+					if(key == 'id'){
+						tableHtmlString += '<a href="manageRecord.php?id="' + key + '">';	
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '</a>';	
+					} else {
+						tableHtmlString += jsonObjectsArray[i][key];	
+					} 	
+
 					tableHtmlString += '</td>';		
 				}		
 				tableHtmlString += '</tr>';		

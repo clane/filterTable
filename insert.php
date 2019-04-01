@@ -2,10 +2,10 @@
 <?php
 $pageTitle = "Record Creation Results";
 
-$description =  $_POST['description'];
-$title =  $_POST['title'];
-$status =  $_POST['status'];
-$priority =  $_POST['priority'];
+$description =  $_GET['description'];
+$title =  $_GET['title'];
+$status =  $_GET['status'];
+$priority =  $_GET['priority'];
 
 include 'dbVars.php';
 include 'top.php';
