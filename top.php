@@ -8,4 +8,6 @@
 	</head>
 	<body>
 	<div id="content">
+		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt=
+vmware"/>
 		<h1><?php echo $pageTitle; ?></h1>

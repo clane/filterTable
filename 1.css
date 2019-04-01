@@ -5,7 +5,7 @@
                 body { background-color:#FBFCFC; color:#1C2833; font-size:2rem;;  } 
         #content { width:90%; margin:auto; } 
                 h1 { font-size:3rem; }
-                label { width:10%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; }
+                label { width:15%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; }
                 input { font-size:2rem; border-radius:5px; height:40px; width:300px; margin:10px auto; }
                 select { border-radius:5px; height:40px; width:100px; margin:10px auto; font-size:1.5rem; }
                 input[type="submit"]{ border-radius:5px; font-size:2rem; margin:20px auto; padding:10px; height:75px; font-weight:bold; border:2px solid #000;  }
