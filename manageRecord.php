@@ -57,7 +57,9 @@ if ($result = mysqli_query($dblink, $query)) {
   		echo("<p>Error description: " . mysqli_error($dblink) . "</p>");
 }
 
-echo '<a href="index.html" id="homeButton">Back to Home</button>';
+echo '<p><a href="deleteForm.php?id=' . $getId . '">Delete record ' . $getId . '</button></p>';
+
+echo '<p><a href="index.html">Back</button></p>';
 
 include 'bottom.php';
 
