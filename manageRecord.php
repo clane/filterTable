@@ -6,7 +6,7 @@ include 'dbVars.php';
 
 $getId = $_GET['id'];;
 
-$pageTitle = 'Managing record id: ' . $getId;
+$pageTitle = 'Manage record id: ' . $getId;
 
 $query =  "SELECT * FROM $table WHERE id = $getId";
 
