@@ -2,13 +2,14 @@
 
 
 				 /* BEGIN page level styles */
-                body { background-color:#FBFCFC; color:#1C2833; font-size:2rem;;  } 
+                body { background-color:#FBFCFC; color:#1C2833; font-size:12px; } 
+				h1 { font-size:2rem; }  
+				form { width:45%; } 
         #content { width:90%; margin:auto; } 
-                h1 { font-size:3rem; }
-                label { width:15%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; }
-                input { font-size:2rem; border-radius:5px; height:40px; width:300px; margin:10px auto; }
-                select { border-radius:5px; height:40px; width:100px; margin:10px auto; font-size:1.5rem; }
-                input[type="submit"]{ border-radius:5px; font-size:2rem; margin:20px auto; padding:10px; height:75px; font-weight:bold; border:2px solid #000;  }
+                label { width:15%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
+                input { border-radius:5px; margin:10px auto;  width:50%; height:1.2rem; }
+                select { width:10%; }
+                input[type="submit"] { width:10%; color:#fff; background-color:#006BA6; }
                 /* END page level styles */
   
                 /* BEGIN Table */
@@ -16,7 +17,7 @@
                 /* END Table */
 
         /* BEGIN Sort Controls */ 
-        #sortButtons label { margin-left:5px; font-size:1.8rem; }  
+        #sortButtons label { margin-left:5px; }  
                 .offscreenText {
                         position: absolute;
                         clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
@@ -31,8 +32,9 @@
                 }
                 
                 .sortRadio { border:1px solid #000; display:inline-block; padding:10px; margin:10px 10px;  border-radius:5px; } 
-        #sortButton { font-weight:bold; font-size:3rem; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
+        #sortButton { font-weight:bold;  display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
                 input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
+                input[type="submit"] { width:; display:inline-block;  } 
                 #status { border:1px solid #000; width:20%; padding:20px; border-radius:5px;  } 
 
                 /* END Sort Controls */ 
