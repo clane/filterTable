@@ -2,12 +2,18 @@
 
 	include 'dbVars.php';
 	$columns = '*';
-    $regEx = "'aa'";
+
+	$colToFilter = $_GET['colToFilter'];
+	$searchString = $_GET['searchString'];
+
+    $regEx = "'" . aa . "'";
 
 	$colToFilter = 'description';
 
 	$query = "SELECT $columns FROM $table WHERE $colToFilter REGEXP $regEx";
-    
+   
+	echo $query;
+ 
 	$result = $dblink->query($query);
 
 	//Initialize array variable
