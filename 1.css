@@ -2,11 +2,11 @@
 
 
 				 /* BEGIN page level styles */
-                body { background-color:#FBFCFC; color:#1C2833; font-size:12px; } 
+                body { background-color:#FBFCFC; color:#1C2833; font-size:20px; } 
+				#content { width:70%; margin:30px auto; } 
 				h1 { font-size:2rem; }  
 				form { width:45%; } 
-        #content { width:90%; margin:auto; } 
-                label { width:15%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
+                label { width:18%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
                 input { border-radius:5px; margin:10px auto;  width:50%; height:1.2rem; }
                 select { width:10%; }
                 input[type="submit"] { width:10%; color:#fff; background-color:#006BA6; }

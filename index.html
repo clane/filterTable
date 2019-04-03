@@ -8,14 +8,22 @@
   <body>
 
     <section id="content">
+
 		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
+
 		<h1>Filter Table</h1>
 
 		<h2>Input Form</h2>
 		<div id="inputFormContainer"></div>
+		<hr />
+
+		<h2>Column Filtering </h2>
+		<div id="filter"></div>
+		<hr />
 
 		<h2>Column Sorting Controls</h2>
 		<div id="sortButtons"></div>
+		<hr />
 
 		<h2>Table</h2>
 		<section id="tableContainer"></section>
@@ -117,8 +125,16 @@
 			$('#inputFormContainer').html(inputForm);
 		} 
 
-		function createDeletForm(jsonObjectsArray) {
+		function createFilterForm(jsonObjectsArray) {
+			let filterForm = '';	
+			filterForm += '<form action="./filter.php" method="get">';
+			filterForm += '<label for="filterColSelect">';
+			filterForm += 'Column to filter by: ';
+			filterForm += '</label>';
 
+			for (let key in jsonObjectsArray[0]) {
+				
+			}
 		} 
 			
 
