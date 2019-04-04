@@ -66,6 +66,7 @@
 	    function init(){
 			let jsonObjectsArray = getData(); 
 			createInputForm(jsonObjectsArray); 
+			createFilterForm(jsonObjectsArray); 
 		    createSortControls(jsonObjectsArray);  
 			createTable(jsonObjectsArray);
 		}
@@ -128,13 +129,15 @@
 		function createFilterForm(jsonObjectsArray) {
 			let filterForm = '';	
 			filterForm += '<form action="./filter.php" method="get">';
-			filterForm += '<label for="filterColSelect">';
-			filterForm += 'Column to filter by: ';
-			filterForm += '</label>';
 
 			for (let key in jsonObjectsArray[0]) {
-				
+                filterForm += '<div>' + key + '</div>';
 			}
+
+			filterForm += '</select>';
+
+			filterForm += '</form>';
+
 			$('#filterContainer').html(filterForm);
 		} 
 			
