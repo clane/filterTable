@@ -6,8 +6,8 @@
 				#content { width:70%; margin:30px auto; } 
 				h1 { font-size:2rem; }  
 				form { width:45%; } 
-                label { width:18%; display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
-                input { border-radius:5px; margin:10px auto;  width:50%; height:1.2rem; }
+                label { display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
+                input { border-radius:5px; margin:10px auto; height:1.2rem; }
                 select { width:10%; }
                 input[type="submit"] { display:block; font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
                 /* END page level styles */
