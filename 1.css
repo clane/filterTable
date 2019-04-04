@@ -16,12 +16,12 @@
                 }
 
                 body { background-color:#FBFCFC; color:#1C2833; font-size:20px; } 
-				#content { width:70%; margin:30px auto; } 
+				#content { width:93%; margin:30px auto; } 
 				h1 { font-size:2rem; }  
 				form { width:45%; } 
                 label { width:40%; display:inline-block; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
                 input { border-radius:5px; margin:10px auto; height:1.2rem; width:50%; }
-                select { width:10%; }
+                select { width:10%; height:2rem; font-size:1rem; }
                 input[type="submit"] { display:block; font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
                 /* END page level styles */
   
@@ -43,6 +43,15 @@
                 /* END Sort Controls */ 
 
 
+				/* BEGIN Manage Form */
+				form[action="update.php"] input[type="submit"] { display:inline; } 
+				/* END Manage Form */
+			
+				/* BEGIN Delete Form */
+				form[action="delete.php"] input[type="submit"] { display:inline; } 
+				form[action="delete.php"] .fieldNames { font-weight:bold;  } 
+				/* END Delete Form */
+			
 
 
 

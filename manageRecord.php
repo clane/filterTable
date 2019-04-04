@@ -41,6 +41,7 @@ if ($result = mysqli_query($dblink, $query)) {
 	  if($fieldNames[$i] != 'id'){
 		  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
 		  echo $fieldNames[$i];
+		  echo ':';
 		  echo '</label>';
 		  echo '<input type="text" ' . 'name="' . $fieldNames[$i] . '" '.  'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
 	  } 

@@ -35,14 +35,15 @@ if ($result = mysqli_query($dblink, $query)) {
 	echo '<form action="delete.php" method="get">';
 	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
-	  echo '<div>';
 	  if($fieldNames[$i] != 'id'){
-		  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
+	      echo '<div>';
+	      echo '<span class="fieldNames">';
 		  echo $fieldNames[$i];
-		  echo '</label>';
-		  echo '<input readonly  type="text" ' . 'name="' . $fieldNames[$i] . '" '.  'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	      echo ': ';
+	  	  echo '</span>';
+		  echo $fieldValues[$i];
+	  	  echo '</div>';
 	  } 
-	  echo '</div>';
 	}
 
 	echo '<div>';
