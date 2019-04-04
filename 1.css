@@ -22,7 +22,7 @@
                 label { width:17%; display:inline-block; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
                 input { border-radius:5px; margin:10px auto; height:1.2rem; width:50%; }
                 select { width:10%; height:2rem; font-size:1rem; }
-                input[type="submit"] { display:block; font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
+                input[type="submit"] { font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
                 /* END page level styles */
   
                 /* BEGIN Table */
