@@ -11,7 +11,7 @@ $query =  "DELETE FROM $table WHERE id = $id";
 // Perform a query, check for error
 if (mysqli_query($dblink, $query) && $id)
   {
-  		echo("<p>Query Succeeded</p>");
+  		echo("<p>Record id $id has been deleted</p>");
   } else {
   		echo("<p>ERROR: Query Failed</p>");
 }
