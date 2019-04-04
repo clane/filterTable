@@ -131,7 +131,12 @@
 			filterForm += '<form action="./filter.php" method="get">';
 
 			for (let key in jsonObjectsArray[0]) {
-                filterForm += '<div>' + key + '</div>';
+                filterForm += '<div>';
+                filterForm += '<label for="' + key + 'filterInput"' + '>';
+                filterForm += 'Where ' +  key + ' contains: '; 
+                filterForm += '</label>';
+                filterForm += '<input id="' + key + 'filterInput"' + '>';
+                filterForm += '</div>';
 			}
 
 			filterForm += '</select>';

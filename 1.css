@@ -1,24 +1,8 @@
 
 
 
-				 /* BEGIN page level styles */
-                body { background-color:#FBFCFC; color:#1C2833; font-size:20px; } 
-				#content { width:70%; margin:30px auto; } 
-				h1 { font-size:2rem; }  
-				form { width:45%; } 
-                label { display:inline-block;text-align:right; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
-                input { border-radius:5px; margin:10px auto; height:1.2rem; }
-                select { width:10%; }
-                input[type="submit"] { display:block; font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
-                /* END page level styles */
-  
-                /* BEGIN Table */
-        table, th, td { border-collapse: collapse; border:2px solid #000; padding:10px; text-align:left; vertical-align:top; } 
-                /* END Table */
-
-        /* BEGIN Sort Controls */ 
-        #sortButtons label { margin-left:5px; }  
-                .offscreenText {
+			  /* BEGIN page level styles */
+  			  .offscreenText {
                         position: absolute;
                         clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
                         clip: rect(1px, 1px, 1px, 1px);
@@ -30,8 +14,27 @@
                         overflow: hidden;
                         white-space: nowrap;
                 }
-                
-                .sortRadio { border:1px solid #000; display:inline-block; padding:10px; margin:10px 10px;  border-radius:5px; } 
+
+                body { background-color:#FBFCFC; color:#1C2833; font-size:20px; } 
+				#content { width:70%; margin:30px auto; } 
+				h1 { font-size:2rem; }  
+				form { width:45%; } 
+                label { width:40%; display:inline-block; margin:auto 5px; font-weight:bold; font-size:1.1rem;  }
+                input { border-radius:5px; margin:10px auto; height:1.2rem; width:50%; }
+                select { width:10%; }
+                input[type="submit"] { display:block; font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
+                /* END page level styles */
+  
+                /* BEGIN Table */
+        table, th, td { border-collapse: collapse; border:2px solid #000; padding:10px; text-align:left; vertical-align:top; } 
+                /* END Table */
+
+        /* BEGIN Sort Controls */ 
+        #sortButtons label { display:block; width:100%;  } 
+
+        #sortButtons > div[role="radiogroup"] { display:flex; } 
+                              
+                .sortRadio { border:1px solid #000;  padding:10px; margin:10px 10px;  border-radius:5px; } 
         #sortButton { font-weight:bold;  display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
                 #sortButton input[type="radio"] { height:2rem; width:2rem; display:inline-block;  } 
                 #sortButton input[type="submit"] { display:inline-block;  } 
