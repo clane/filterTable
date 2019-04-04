@@ -32,6 +32,7 @@ if ($result = mysqli_query($dblink, $query)) {
     mysqli_free_result($result);
 
 	include 'top.php';
+	echo '<h2>Are you sure you want to delete this record?</h2>';
 	echo '<form action="delete.php" method="get">';
 	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
@@ -57,7 +58,7 @@ if ($result = mysqli_query($dblink, $query)) {
 }
 
 
-echo '<p><a href="manageRecord.php?id=' . $getId . '">Manage record ' . $getId . '</a></p>';
+echo '<p><a href="manageRecord.php?id=' . $getId . '">Back' . '</a></p>';
 
 include 'bottom.php';
 
