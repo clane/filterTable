@@ -34,8 +34,6 @@
 
 	<script>
 
-
-		var sortColumn, sortDirection;
 		function getData(){
 			let url = './getTableJSON.php';
 			let jsonObjectsArray = [];
@@ -68,8 +66,8 @@
 	    function init(){
 			let jsonObjectsArray = getData(); 
 			createInputForm(jsonObjectsArray); 
-			createFilterForm(jsonObjectsArray); 
 		    createSortControls(jsonObjectsArray);  
+			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 			createTable(jsonObjectsArray);
 		}
 
@@ -85,6 +83,8 @@
 				
             });
             $('#sortStatus').text('now sorting by' + orderBy); 
+            $('#sortStatus').attr('data-current_sort_column', sortColumn); 
+            $('#sortStatus').attr('data-current_sort_direction', sortDirection); 
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
 		} 
@@ -129,6 +129,9 @@
 		} 
 
 		function createFilterForm(jsonObjectsArray) {
+			let sortColumn = $('#sortStatus').attr('data-current_sort_column'); 
+			let sortDirection = $('#sortDirection').attr(''); 
+			console.log(sortColumn); 
 			let filterForm = '';	
 			filterForm += '<form action="./filter.php" method="get">';
             filterForm += '<input type="hidden" name="sort_column" value="' + sortColumn + '">';
