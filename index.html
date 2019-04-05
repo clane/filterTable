@@ -11,7 +11,7 @@
 
 		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
 
-		<h1>Filter Table</h1>
+		<h1>Mock Internal Tool</h1>
 
 		<h2>Input Form</h2>
 		<div id="inputFormContainer"></div>
@@ -121,7 +121,7 @@
 				inputForm += '</div>';
 
 			} 
-            inputForm += '<input type="submit" value="Submit">'; 
+            inputForm += '<input type="submit" value="Add">'; 
 			inputForm += '</form>';
 			$('#inputFormContainer').html(inputForm);
 		} 
@@ -140,6 +140,7 @@
 			}
 
 			filterForm += '</select>';
+            filterForm += '<input type="submit" value="Filter">'; 
 
 			filterForm += '</form>';
 
@@ -189,18 +190,16 @@
 
 			sortButtonsHtmlString += '</div>';
 			sortButtonsHtmlString += '<h3>Sort Status</h3>';
+			sortButtonsHtmlString += '<p>The following sort direction status message changes dynamically and each change will be announced by screen readers:</p>';
 			sortButtonsHtmlString += '<div id="status" aria-live="polite"></div>';
 		    	
-
 			$('#sortButtons').html(sortButtonsHtmlString);
 
             $('#status').text('now sorting by id descending'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
 
-
 		}
 
- 
     	function createTable(jsonObjectsArray){
 
             tableHtmlString = '<table>';
