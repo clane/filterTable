@@ -140,10 +140,12 @@
             filterForm += '<input type="hidden" name="filter_sort_direction" value="' + defaultSortDirection + '">';
 
 			for (let key in jsonObjectsArray[0]) {
-                filterForm += '<label for="' + key + 'filterInput"' + '>';
-                filterForm += 'Where ' +  key + ' contains: '; 
-                filterForm += '</label>';
-                filterForm += '<input id="' + key + 'filterInput"' + 'name="' + key + '">';
+				if(key !== 'id'){
+					filterForm += '<label for="' + key + 'filterInput"' + '>';
+					filterForm += 'Where ' +  key + ' contains: '; 
+					filterForm += '</label>';
+					filterForm += '<input id="' + key + 'filterInput"' + 'name="' + key + '">';
+				} 
 			}
 
             filterForm += '<input type="submit" value="Filter">'; 

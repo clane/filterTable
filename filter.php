@@ -19,8 +19,6 @@ $orderBy = "ORDER BY $sortColumn $sortDirection";
 foreach($_GET as $key => $value){
  	if($key && $value) {
 		if($key != 'filter_sort_column' && $key != 'filter_sort_direction'){
-			echo "<p>$key</p>";
- 			echo "<p>$value</p>";
 			array_push($colsToSearch, $key);
 			array_push($searchStrings, $value);
 		}
