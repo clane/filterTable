@@ -31,15 +31,14 @@
 
         		/* BEGIN Sort Controls */ 
         		#sortButtons > div[role="radiogroup"] { display:flex; } 
-        		#sortButtons > div[aria-live="polite"] { border:1px solid #000; width:50%; padding:20px; } 
+        		#sortButtons > div[aria-live="polite"] { font-weight:bold; border:1px solid #000; width:50%; padding:20px; } 
                               
-        		.sortRadio { display:flex; width:27%; border:1px solid #000; padding:5px;  margin:10px 10px;  border-radius:5px; } 
+        		.sortRadio { display:flex; width:15%; border:1px solid #000; padding:5px;  margin:10px 10px;  border-radius:5px; } 
         		.sortRadio label { width:70%; } 
 	            .sortRadio input[type="radio"] { width:20%; padding:0; margin:0;  } 
 
         		#sortButton { font-weight:bold; display:block; border-radius:10px; margin:10px 10px; border:3px solid #000; width:10%; } 
                 #sortButton input[type="submit"] { display:inline-block;  } 
-                #sortButton #status { border:1px solid #000; width:20%; padding:20px; border-radius:5px;  } 
 
                 /* END Sort Controls */ 
 
