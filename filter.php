@@ -26,7 +26,10 @@ foreach($_GET as $key => $value){
 }
 
 for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
-	$where .=  " $colsToSearch[$i] =  $searchStrings[$i] AND"; 
+	$where .= " $colsToSearch[$i] = $searchStrings[$i]";
+	if($i > 0){
+		$where .= " AND ";
+	}  
 	echo $where;
 } 
 
