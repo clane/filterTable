@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>A11Y Filter Table</title>
+    <title>Mock Internal Tool</title>
 	<link rel="stylesheet" href="1.css">
   </head>
   <body>
@@ -134,10 +134,9 @@
                 filterForm += '<label for="' + key + 'filterInput"' + '>';
                 filterForm += 'Where ' +  key + ' contains: '; 
                 filterForm += '</label>';
-                filterForm += '<input id="' + key + 'filterInput"' + '>';
+                filterForm += '<input id="' + key + 'filterInput"' + 'name="' + key + '_ColumnSearchString"' + '>';
 			}
 
-			filterForm += '</select>';
             filterForm += '<input type="submit" value="Filter">'; 
 
 			filterForm += '</form>';
