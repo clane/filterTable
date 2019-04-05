@@ -14,6 +14,7 @@
                         overflow: hidden;
                         white-space: nowrap;
                 }
+			 .error { color:red; } 
 
                 body { background-color:#FBFCFC; color:#1C2833; font-size:20px; } 
 				#content { width:93%; margin:30px auto; } 

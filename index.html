@@ -82,6 +82,8 @@
 				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
 				
             });
+            $('#status').attr('data-current_sort_column', sortColumn)
+            $('#status').attr('data-current_sort_direction', sortDirection)
             $('#status').text('now sorting by' + orderBy); 
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
@@ -191,8 +193,10 @@
 			sortButtonsHtmlString += '<div id="status" aria-live="polite"></div>';
 		    	
 			$('#sortButtons').html(sortButtonsHtmlString);
-
+			$('#status').attr('data-current_sort_column', 'id')
+            $('#status').attr('data-current_sort_direction', 'DESC')
             $('#status').text('now sorting by id descending'); 
+            $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
 
 		}
