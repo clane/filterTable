@@ -34,6 +34,7 @@ if ($result = mysqli_query($dblink, $query)) {
     mysqli_free_result($result);
 
 	include 'top.php';
+    echo '<p>To update this record you can edit the fields in  the following form. To delete this record use the link at the bottom of the page.</p>';
 	echo '<form action="update.php" method="get">';
 	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
