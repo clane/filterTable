@@ -34,6 +34,8 @@
 
 	<script>
 
+
+		var sortColumn, sortDirection;
 		function getData(){
 			let url = './getTableJSON.php';
 			let jsonObjectsArray = [];
@@ -72,19 +74,17 @@
 		}
 
 	    function sort(e){
-			let sortColumn, sortDirection;
 			let orderBy = '';
          
 			let checkedCnt = 0;  
-            $("#sortButtons input[type=radio]:checked").each(function() {    checkedCnt++; 
+            $("#sortButtons input[type=radio]:checked").each(function() { 
+				checkedCnt++; 
 				sortColumn  = $(this).attr('data-sortcolumn'); 
 				sortDirection = $(this).attr('data-sortdirection');
 				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
 				
             });
-            $('#status').attr('data-current_sort_column', sortColumn)
-            $('#status').attr('data-current_sort_direction', sortDirection)
-            $('#status').text('now sorting by' + orderBy); 
+            $('#sortStatus').text('now sorting by' + orderBy); 
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
 		} 
@@ -131,6 +131,8 @@
 		function createFilterForm(jsonObjectsArray) {
 			let filterForm = '';	
 			filterForm += '<form action="./filter.php" method="get">';
+            filterForm += '<input type="hidden" name="sort_column" value="' + sortColumn + '">';
+            filterForm += '<input type="hidden" name="sort_direction" value="' + sortDirection + '">';
 
 			for (let key in jsonObjectsArray[0]) {
                 filterForm += '<label for="' + key + 'filterInput"' + '>';
@@ -189,13 +191,13 @@
 
 			sortButtonsHtmlString += '</div>';
 			sortButtonsHtmlString += '<h3>Sort Status</h3>';
-			sortButtonsHtmlString += '<p>The following sort direction status message changes dynamically and each change will be announced by screen readers:</p>';
-			sortButtonsHtmlString += '<div id="status" aria-live="polite"></div>';
+			sortButtonsHtmlString += '<p>The following sort direction sortStatus message changes dynamically and each change will be announced by screen readers:</p>';
+			sortButtonsHtmlString += '<div id="sortStatus" aria-live="polite"></div>';
 		    	
 			$('#sortButtons').html(sortButtonsHtmlString);
-			$('#status').attr('data-current_sort_column', 'id')
-            $('#status').attr('data-current_sort_direction', 'DESC')
-            $('#status').text('now sorting by id descending'); 
+			$('#sortStatus').attr('data-current_sort_column', 'id')
+            $('#sortStatus').attr('data-current_sort_direction', 'DESC')
+            $('#sortStatus').text('now sorting by id descending'); 
             $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
 
