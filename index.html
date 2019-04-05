@@ -83,8 +83,11 @@
 				
             });
             $('#sortStatus').text('now sorting by' + orderBy); 
-            $('#sortStatus').attr('data-current_sort_column', sortColumn); 
-            $('#sortStatus').attr('data-current_sort_direction', sortDirection); 
+
+			//update hidden fields in filter form so filtering can be done with the correct sorting 
+            $('#filterContainer [name="filter_sort_column"]').attr('value', sortColumn); 
+            $('#filterContainer [name="filter_sort_direction"]').attr('value', sortDirection); 
+
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
 		} 
@@ -129,13 +132,12 @@
 		} 
 
 		function createFilterForm(jsonObjectsArray) {
-			let sortColumn = $('#sortStatus').attr('data-current_sort_column'); 
-			let sortDirection = $('#sortDirection').attr(''); 
-			console.log(sortColumn); 
 			let filterForm = '';	
+			let defaultSortColumn = 'id';
+	 		let defaultSortDirection = 'DESC'; 
 			filterForm += '<form action="./filter.php" method="get">';
-            filterForm += '<input type="hidden" name="sort_column" value="' + sortColumn + '">';
-            filterForm += '<input type="hidden" name="sort_direction" value="' + sortDirection + '">';
+            filterForm += '<input type="hidden" name="filter_sort_column" value="' + defaultSortColumn + '">';
+            filterForm += '<input type="hidden" name="filter_sort_direction" value="' + defaultSortDirection + '">';
 
 			for (let key in jsonObjectsArray[0]) {
                 filterForm += '<label for="' + key + 'filterInput"' + '>';
@@ -198,8 +200,6 @@
 			sortButtonsHtmlString += '<div id="sortStatus" aria-live="polite"></div>';
 		    	
 			$('#sortButtons').html(sortButtonsHtmlString);
-			$('#sortStatus').attr('data-current_sort_column', 'id')
-            $('#sortStatus').attr('data-current_sort_direction', 'DESC')
             $('#sortStatus').text('now sorting by id descending'); 
             $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
