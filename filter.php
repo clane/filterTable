@@ -7,7 +7,7 @@ $title = "";
 $columns = '*';
 $select = "SELECT * FROM $table";
 $where = "WHERE";
-$query = $select + $where;
+$query = $select . $where;
 
 $colsToSearch = [];
 $searchStrings = [];
@@ -26,7 +26,8 @@ foreach($_GET as $key => $value){
 }
 
 for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
-    echo "The number is: $i <br>";
+	$where .=  " $colsToSearch[$i] =  $searchStrings[$i]"; 
+	echo $where;
 } 
 
 
