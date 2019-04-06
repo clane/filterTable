@@ -1,7 +1,6 @@
 <?php
 
 include 'dbVars.php';
-include 'top.php';
 
 $title = "";
 $columns = '*';
@@ -35,7 +34,6 @@ for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
 
 $query = $select . ' ' . $where . ' ' . $orderBy;
 
-
 $result = $dblink->query($query);
 
 $dbdata = array();
@@ -43,14 +41,8 @@ while ($row = $result->fetch_assoc())  {
 	$dbdata[]=$row;
 }
 
-if($dbdata){
-	echo json_encode($dbdata);
-} else {
-	echo "<p class=\"error\">Error: the filter query below did not return any results</p>";
-	echo "<div>$query</div>";
-} 
+echo json_encode($dbdata);
 
-include 'bottom.php';
 
 
 ?>
