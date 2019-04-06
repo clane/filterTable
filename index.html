@@ -44,9 +44,7 @@
 			  success: function(data) { jsonObjectsArray = data;},
 			  async: false
 			});
-
 			return jsonObjectsArray;
-
 		}
 
    		function getDataForSort(orderBy){
@@ -62,8 +60,9 @@
 			return jsonObjectsArray;
 		}
 
-		function getDataForFilter(){
-			let url = './filter.php?';
+		function getFilteredData(filters){
+			console.log(filters);
+			let url = './filter.php?filters=' + filters;
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: "GET",
@@ -75,7 +74,6 @@
 			return jsonObjectsArray;
 		}
 
-
 	    function init(){
 			let jsonObjectsArray = getData(); 
 			createInputForm(jsonObjectsArray); 
@@ -86,29 +84,34 @@
 
 	    function sort(e){
 			let orderBy = '';
-         
-			let checkedCnt = 0;  
             $("#sortButtons input[type=radio]:checked").each(function() { 
-				checkedCnt++; 
 				sortColumn  = $(this).attr('data-sortcolumn'); 
 				sortDirection = $(this).attr('data-sortdirection');
 				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
-				
             });
             $('#sortStatus').text('now sorting by' + orderBy); 
-
 			//update hidden fields in filter form so filtering can be done with the correct sorting 
             $('#filterContainer [name="filter_sort_column"]').attr('value', sortColumn); 
             $('#filterContainer [name="filter_sort_direction"]').attr('value', sortDirection); 
-
         	let jsonObjectsArray = getDataForSort(orderBy); 
 			createTable(jsonObjectsArray);
 		} 
 
+		function filter(e){
+			console.log('in filter'); 
+			let filters = '';
+            $("#filterContainer input[type='text']").each(function() { 
+				filterColumn  = $(this).attr('name'); 
+				filterString = $(this).attr('value');
+				filters += ' ' +  filterColumn + ' ' + filterString;
+            });
+        	let jsonObjectsArray = getFilteredData(filters); 
+			createTable(jsonObjectsArray);
+		}
+
 		function createInputForm(jsonObjectsArray) {
 			let inputForm = '';	
 			inputForm += '<form action="./insert.php" method="get">';
-			
 			for (let key in jsonObjectsArray[0]) {
 					let id = key + '_input';
 					inputForm += '<div>';
@@ -148,7 +151,6 @@
 			let filterForm = '';	
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC'; 
-			filterForm += '<form action="./filter.php" method="get">';
             filterForm += '<input type="hidden" name="filter_sort_column" value="' + defaultSortColumn + '">';
             filterForm += '<input type="hidden" name="filter_sort_direction" value="' + defaultSortDirection + '">';
 
@@ -157,15 +159,13 @@
 					filterForm += '<label for="' + key + 'filterInput"' + '>';
 					filterForm += 'Where ' +  key + ' contains: '; 
 					filterForm += '</label>';
-					filterForm += '<input id="' + key + 'filterInput"' + 'name="' + key + '">';
+					filterForm += '<input type="text" id="' + key + 'filterInput"' + 'name="' + key + '">';
 				} 
 			}
 
             filterForm += '<input type="submit" value="Filter">'; 
-
-			filterForm += '</form>';
-
 			$('#filterContainer').html(filterForm);
+			$('#filterContainer input[type="submit"]').click(()=>{filter();});
 		} 
 			
 
@@ -173,10 +173,8 @@
 			let	sortButtonsHtmlString = ''; 
 			let tableHtmlString;
 			let radioName = "sort";
-		           
 			sortButtonsHtmlString += '<div role="radiogroup" aria-label="sorting choices">';
 			for (let key in jsonObjectsArray[0]) {
-
 				//sort ascending radio buttons
 				sortButtonsHtmlString += '<div class="sortRadio">';
 				sortButtonsHtmlString += '<input type="radio" name="' + radioName + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="ASC"' + ' id="' + key + '_ascending">';
@@ -206,23 +204,19 @@
 				sortButtonsHtmlString += '</span>'; 
 				sortButtonsHtmlString += '</label>'; 
 				sortButtonsHtmlString += '</div>';
-
 			}
 
 			sortButtonsHtmlString += '</div>';
 			sortButtonsHtmlString += '<h3>Sort Status</h3>';
 			sortButtonsHtmlString += '<p>The following sort direction status message changes dynamically and each change will be announced by screen readers:</p>';
 			sortButtonsHtmlString += '<div id="sortStatus" aria-live="polite"></div>';
-		    	
 			$('#sortButtons').html(sortButtonsHtmlString);
             $('#sortStatus').text('now sorting by id descending'); 
             $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
-
 		}
 
     	function createTable(jsonObjectsArray){
-
             tableHtmlString = '<table>';
 			tableHtmlString += '<tr>';
 			for (let key in jsonObjectsArray[0]) {
@@ -231,12 +225,10 @@
 				tableHtmlString += '</th>';
 			}
 			tableHtmlString += '</tr>';
-
 			for(let i = 0; i < jsonObjectsArray.length; i++) {
 				tableHtmlString += '<tr>';		
 				for (let key in jsonObjectsArray[i]) {
 					tableHtmlString += '<td>';		
-
 					if(key === 'id'){
 						tableHtmlString += '<a href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
 						tableHtmlString += jsonObjectsArray[i][key];	
@@ -244,16 +236,12 @@
 					} else {
 						tableHtmlString += jsonObjectsArray[i][key];	
 					} 	
-
 					tableHtmlString += '</td>';		
 				}		
 				tableHtmlString += '</tr>';		
 			}
-
 			tableHtmlString += "</table>";
-
 			$('#tableContainer').html(tableHtmlString);
-
 		}
 		
 		init();  
