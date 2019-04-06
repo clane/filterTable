@@ -59,10 +59,23 @@
 			  success: function(data) { jsonObjectsArray = data;},
 			  async: false
 			});
-
 			return jsonObjectsArray;
-
 		}
+
+		function getDataForFilter(){
+			let url = './filter.php?';
+			let jsonObjectsArray = [];
+			$.ajax({
+			  type: "GET",
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
+
+
 	    function init(){
 			let jsonObjectsArray = getData(); 
 			createInputForm(jsonObjectsArray); 

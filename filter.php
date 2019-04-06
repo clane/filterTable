@@ -31,12 +31,17 @@ for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
 	}
 } 
 
-echo '<div>' . $where . '</div>';
-
 $query = $select . ' ' . $where . ' ' . $orderBy;
 
-echo '<div>' . $query . '</div>';
+$result = $dblink->query($query);
 
+$dbdata = array();
+
+while ($row = $result->fetch_assoc())  {
+	$dbdata[]=$row;
+}
+
+echo json_encode($dbdata);
 
 include 'bottom.php';
 
