@@ -6,7 +6,7 @@ include 'top.php';
 $title = "";
 $columns = '*';
 $select = "SELECT * FROM $table";
-$where = "WHERE";
+$where = "WHERE ";
 $query = $select . $where;
 
 $colsToSearch = [];
@@ -26,13 +26,13 @@ foreach($_GET as $key => $value){
 }
 
 for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
-	$where .= " $colsToSearch[$i] = $searchStrings[$i]";
-	if($i > 0){
+	$where .= " $colsToSearch[$i] = '" . $searchStrings[$i] . "'";
+	if($i < (sizeOf($colsToSearch)) - 1){
 		$where .= " AND ";
-	}  
-	echo $where;
+	}
 } 
 
+	echo '<div>' . $where . '</div>';
 
 include 'bottom.php';
 
