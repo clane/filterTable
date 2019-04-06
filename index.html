@@ -62,7 +62,7 @@
 
 		function getFilteredData(filters){
 			console.log(filters);
-			let url = './filter.php?filters=' + filters;
+			let url = './filter.php?' + filters;
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: "GET",
@@ -100,10 +100,14 @@
 		function filter(e){
 			console.log('in filter'); 
 			let filters = '';
-            $("#filterContainer input[type='text']").each(function() { 
+			let length = $("#filterContainer input[type='text']").length;
+            $("#filterContainer input[type='text']").each(function(index) { 
 				filterColumn  = $(this).attr('name'); 
 				filterString = $(this).val();
-				filters += ' ' +  filterColumn + ' ' + filterString;
+				filters += filterColumn + '=' + filterString;
+				if (index !== (length - 1)){
+					filters += '&';
+				}
             });
         	let jsonObjectsArray = getFilteredData(filters); 
 			createTable(jsonObjectsArray);
