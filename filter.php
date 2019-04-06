@@ -7,7 +7,6 @@ $title = "";
 $columns = '*';
 $select = "SELECT * FROM $table";
 $where = "WHERE ";
-$query = $select . $where;
 
 $colsToSearch = [];
 $searchStrings = [];
@@ -32,7 +31,12 @@ for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
 	}
 } 
 
-	echo '<div>' . $where . '</div>';
+echo '<div>' . $where . '</div>';
+
+$query = $select . ' ' . $where . ' ' . $orderBy;
+
+echo '<div>' . $query . '</div>';
+
 
 include 'bottom.php';
 
