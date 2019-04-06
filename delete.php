@@ -13,7 +13,7 @@ if (mysqli_query($dblink, $query) && $id)
   {
   		echo("<p>Record id $id has been deleted</p>");
   } else {
-  		echo("<p>ERROR: Query Failed</p>");
+  		echo("<p class="/error/">ERROR: Query Failed</p>");
 }
 
 echo '<a href="http://www.chrislane.info/examples/filterTable/">Back to table</a>'; 

@@ -17,10 +17,10 @@ if (mysqli_query($dblink, $query) && $description && $title && $status && $prior
   {
   echo("<p>Query Succeeded</p>");
   } else {
-  		echo("<p>ERROR: Query Failed</p>");
+  		echo("<p class="/error/">ERROR: Query Failed</p>");
 }
 
-echo '<a style="display:block; font-size:3rem; margin:20px;" href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
+echo '<a href="http://www.chrislane.info/examples/filterTable/">Back to form</a>'; 
 
 include 'bottom.php';
 

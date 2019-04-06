@@ -17,7 +17,7 @@ foreach ($_GET as $param_name => $param_val) {
 		$query = "UPDATE $table SET $column = '$value' WHERE id = $id";
 
 		if (!$result = mysqli_query($dblink, $query)) {
-			echo '<p>Query failed!</p>';
+			echo '<p class="error">Query failed!</p>';
 		}
 
 	} 
