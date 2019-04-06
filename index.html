@@ -104,7 +104,7 @@
 
 		function filter(e){
 			let length = $("#filterContainer input[type='text']").length;
-			let query;
+			let query = '';
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
 			let sortDir = $("#sortStatus").attr('data-sortdir'); 
 			console.log(sortCol);
@@ -112,7 +112,7 @@
             $("#filterContainer input[type='text']").each(function(index) { 
 				filterColumn  = $(this).attr('name'); 
 				filterString = $(this).val();
-				query = filterColumn + '=' + filterString;
+				query += filterColumn + '=' + filterString;
 				if (index !== (length - 1)){
 					query += '&';
 				}
