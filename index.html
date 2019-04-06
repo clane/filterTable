@@ -102,7 +102,7 @@
 			let filters = '';
             $("#filterContainer input[type='text']").each(function() { 
 				filterColumn  = $(this).attr('name'); 
-				filterString = $(this).attr('value');
+				filterString = $(this).val();
 				filters += ' ' +  filterColumn + ' ' + filterString;
             });
         	let jsonObjectsArray = getFilteredData(filters); 
