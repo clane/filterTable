@@ -26,7 +26,7 @@
 		<hr />
 
 		<h2>Sorting and Filtering Status</h2>
-		<div id="sortStatus" aria-live="polite" data-sortcol="" data-sortdir="" data-filtercol="" data-filterstring=""></div>
+		<div id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></div>
 
 		<hr />
 
@@ -104,14 +104,23 @@
 
 		function filter(e){
 			let length = $("#filterContainer input[type='text']").length;
+			let query;
+			let sortCol = $("#sortStatus").attr('data-sortcol'); 
+			let sortDir = $("#sortStatus").attr('data-sortdir'); 
+			console.log(sortCol);
+			console.log(sortDir);
             $("#filterContainer input[type='text']").each(function(index) { 
 				filterColumn  = $(this).attr('name'); 
 				filterString = $(this).val();
-				let query = filterColumn + '=' + filterString;
+				query = filterColumn + '=' + filterString;
 				if (index !== (length - 1)){
 					query += '&';
 				}
             });
+			query += '&';
+			query += 'filter_sort_column=' + sortCol;
+			query += '&';
+			query += 'filter_sort_direction=' + sortDir;
         	let jsonObjectsArray = getFilteredData(query); 
 			createTable(jsonObjectsArray);
 		}
