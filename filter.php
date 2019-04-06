@@ -33,19 +33,22 @@ for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
 	}
 } 
 
-#$query = "SELECT * FROM $table";
 $query = $select . ' ' . $where . ' ' . $orderBy;
-echo "<div>$query</div>";
+
 
 $result = $dblink->query($query);
 
 $dbdata = array();
-
 while ($row = $result->fetch_assoc())  {
 	$dbdata[]=$row;
 }
 
-echo json_encode($dbdata);
+if($dbdata){
+	echo json_encode($dbdata);
+} else {
+	echo "<p class=\"error\">Error: the filter query below did not return any results</p>";
+	echo "<div>$query</div>";
+} 
 
 include 'bottom.php';
 
