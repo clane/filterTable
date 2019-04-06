@@ -103,18 +103,16 @@
 		} 
 
 		function filter(e){
-			console.log('in filter'); 
-			let filters = '';
 			let length = $("#filterContainer input[type='text']").length;
             $("#filterContainer input[type='text']").each(function(index) { 
 				filterColumn  = $(this).attr('name'); 
 				filterString = $(this).val();
-				filters += filterColumn + '=' + filterString;
+				let query = filterColumn + '=' + filterString;
 				if (index !== (length - 1)){
-					filters += '&';
+					query += '&';
 				}
             });
-        	let jsonObjectsArray = getFilteredData(filters); 
+        	let jsonObjectsArray = getFilteredData(query); 
 			createTable(jsonObjectsArray);
 		}
 
