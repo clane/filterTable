@@ -6,7 +6,6 @@ include 'top.php';
 $title = "";
 $columns = '*';
 $select = "SELECT * FROM $table";
-$where = "WHERE ";
 
 $colsToSearch = [];
 $searchStrings = [];
@@ -25,13 +24,18 @@ foreach($_GET as $key => $value){
 }
 
 for ($i = 0; $i < sizeOf($colsToSearch); $i++) {
-	$where .= " $colsToSearch[$i] = '" . $searchStrings[$i] . "'";
+	if($i == 0){
+		$where .= 'WHERE ';
+	}
+	$where .= " $colsToSearch[$i] LIKE '%" . $searchStrings[$i] . "%'";
 	if($i < (sizeOf($colsToSearch)) - 1){
 		$where .= " AND ";
 	}
 } 
 
+#$query = "SELECT * FROM $table";
 $query = $select . ' ' . $where . ' ' . $orderBy;
+echo "<div>$query</div>";
 
 $result = $dblink->query($query);
 
