@@ -241,7 +241,9 @@
 				for (let key in jsonObjectsArray[i]) {
 					tableHtmlString += '<td>';		
 					if(key === 'id'){
-						tableHtmlString += '<a href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '&nbsp;<a class="manageLink"href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
+						tableHtmlString += 'manage record ';	
 						tableHtmlString += jsonObjectsArray[i][key];	
 						tableHtmlString += '</a>';	
 					} else {

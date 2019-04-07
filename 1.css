@@ -58,5 +58,7 @@
 				#filterContainer  label  { width:40%;  } 
 				/* END Filter Form */
 
-
+				/* BEGIN Manage Links */
+				.manageLink { font-size:1rem; } 
+				/* END  Manage Links */
 
