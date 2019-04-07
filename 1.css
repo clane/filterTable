@@ -3,16 +3,16 @@
 
 			  /* BEGIN page level styles */
   			  .offscreenText {
-                        position: absolute;
-                        clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-                        clip: rect(1px, 1px, 1px, 1px);
-                        clip-path: inset(50%);
-                        padding: 0;
-                        border: 0;
-                        height: 1px; 
-                        width: 1px; 
-                        overflow: hidden;
-                        white-space: nowrap;
+					position: absolute;
+					clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+					clip: rect(1px, 1px, 1px, 1px);
+					clip-path: inset(50%);
+					padding: 0;
+					border: 0;
+					height: 1px; 
+					width: 1px; 
+					overflow: hidden;
+					white-space: nowrap;
                 }
 			 .error { color:red; font-size:1.3rem; } 
 
@@ -43,7 +43,6 @@
 
                 /* END Sort Controls */ 
 
-
 				/* BEGIN Manage Form */
 				form[action="update.php"] input[type="submit"] { display:inline; } 
 				/* END Manage Form */
@@ -55,6 +54,7 @@
 			
 				/* BEGIN Filter Form */
 				form[action="filter.php"] input[type="submit"] { display:inline; } 
+				#filterContainer { width:50%;  } 
 				#filterContainer  label  { width:40%;  } 
 				/* END Filter Form */
 
