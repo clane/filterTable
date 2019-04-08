@@ -8,8 +8,9 @@
   <body>
 
     <section id="content">
-
 		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
+
+		<p><a id="skiplink" href="#">Skip to table</a></p> 
 
 		<h1>Mock Internal Tool</h1>
 
@@ -33,7 +34,7 @@
 
 		<hr />
 
-		<h2>Table</h2>
+		<h2 id="tableh2" tabindex="-1">Table</h2>
 		<section id="tableContainer"></section>
 
     </section>
@@ -88,6 +89,9 @@
 		    createSortControls(jsonObjectsArray);  
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 			createTable(jsonObjectsArray);
+			$('#skiplink').click(()=>{ 
+				$('#tableh2').focus(); 
+			});
 		}
 
 	    function sort(e){
