@@ -101,7 +101,7 @@
 				sortDirection = $(this).attr('data-sortdirection');
 				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
             });
-            $('#sortStatus').text('now sorting by' + orderBy); 
+            $('#sortStatus').text('Now sorting by' + orderBy); 
 			//update status attributes in live region so filtering can be done with the correct sorting 
             $('#sortStatus').attr('data-sortcol', sortColumn); 
             $('#sortStatus').attr('data-sortdir', sortDirection); 
@@ -114,9 +114,15 @@
 			let query = '';
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
 			let sortDir = $("#sortStatus").attr('data-sortdir'); 
+            let filterCols = [];
+ 			let filterStrings = []; 
             $("#filterContainer input[type='text']").each(function(index) { 
 				filterColumn  = $(this).attr('name'); 
 				filterString = $(this).val();
+				if(filterString.length > 0){
+					filterCols.push(filterColumn); 
+					filterStrings.push(filterString); 
+				}
 				query += filterColumn + '=' + filterString;
 				if (index !== (length - 1)){
 					query += '&';
@@ -128,7 +134,19 @@
 			query += 'filter_sort_direction=' + sortDir;
         	let jsonObjectsArray = getFilteredData(query); 
 			createTable(jsonObjectsArray);
-            $('#filterStatus').text('Now filtering by ' + query); 
+            let filterMessage = '';
+			for(let i = 0; i < filterCols.length; i++) {
+				filterMessage += filterCols[i];
+				filterMessage += ' like ';
+				filterMessage += '"';
+				filterMessage += filterStrings[i];
+				filterMessage += '"';
+				if(i < filterCols.length - 1){
+					filterMessage += ' AND ';
+				}
+			}
+            $('#filterStatus').text('Now filtering by: ' +  filterMessage); 
+
 		}
 
 		function createInputForm(jsonObjectsArray) {
@@ -228,7 +246,7 @@
 
 			sortButtonsHtmlString += '</div>';
 			$('#sortButtons').html(sortButtonsHtmlString);
-            $('#sortStatus').text('now sorting by id descending'); 
+            $('#sortStatus').text('Now sorting by id descending'); 
             $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
 		}
