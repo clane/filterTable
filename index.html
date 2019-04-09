@@ -20,7 +20,13 @@
 		</div>
 		<hr />
 
-		<h2>Column Filtering </h2>
+		<h2>Preset Filters</h2>
+		<p>Filter by any of the search terms below.</p> 
+		<div id="presetFilterContainer"></div>
+		<hr />
+
+		<h2>Column Filtering using search terms </h2>
+		<p>Enter a search term for one more columns using the form below.</p> 
 		<div id="filterContainer"></div>
 		<hr />
 
@@ -89,6 +95,7 @@
 			let jsonObjectsArray = getData(); 
 		    createSortControls(jsonObjectsArray);  
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
+		    createPresetFilterForm();  
 			createTable(jsonObjectsArray);
 			$('#skiplink').click(()=>{ 
 				$('#tableh2').focus(); 
@@ -169,6 +176,28 @@
 			$('#filterContainer input[type="submit"]').click(()=>{filter();});
 		} 
 			
+		function createPresetFilterForm() {
+			let searchStrings = ['aa', 'bb', 'ccc']; 
+			let presetFilterForm = '';	
+			let defaultSortColumn = 'id';
+	 		let defaultSortDirection = 'DESC'; 
+            
+			for(let i=0; i < searchStrings.length; i++){
+				console.log(searchStrings[i]);
+				presetFilterForm += '<div class="checkboxContainer">';
+				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
+				presetFilterForm += searchStrings[i];
+				presetFilterForm += '</label>';
+				presetFilterForm += '<input type="checkbox" id="presetSearchTerm_' + i + '">';
+				presetFilterForm += '</div>';
+
+			} 
+
+
+            presetFilterForm += '<input type="submit" value="Filter">'; 
+			$('#presetFilterContainer').html(presetFilterForm);
+			$('#presetFilterContainer input[type="submit"]').click(()=>{filter();});
+		} 
 
 		function createSortControls(jsonObjectsArray) {
 			let	sortButtonsHtmlString = ''; 
