@@ -2,7 +2,6 @@
 
 include 'dbVars.php';
 
-$title = "";
 $columns = '*';
 $select = "SELECT * FROM $table";
 
