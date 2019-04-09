@@ -8,7 +8,6 @@ $select = "SELECT * FROM $table";
 $colsToSearch = [];
 $searchStrings = [];
 
-
 $query = "SHOW COLUMNS FROM $table";
 
 $result = $dblink->query($query);
@@ -16,11 +15,16 @@ $result = $dblink->query($query);
 $dbdata = array();
 while ($row = $result->fetch_assoc())  {
 	$dbdata[]=$row;
+	$fieldname = $row['Field'];
+	if( $fieldname !== 'id') {
+		array_push($colsToSearch, $fieldname); 
+	}
 
- echo $row['Field']."<br>";
 }
 
-echo json_encode($dbdata);
+for($i = 0; $i < sizeOf($colsToSearch); $i++){
+	echo $colsToSearch[$i]; 
+}
 
 
 

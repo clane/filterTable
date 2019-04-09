@@ -1,16 +1,32 @@
+<?php
 
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# On branch master
-# Your branch is up to date with 'origin/master'.
-#
-# Changes to be committed:
-#	modified:   index.html
-#
-# Untracked files:
-#	.index.html.swp
-#	error_log
-#
+include 'dbVars.php';
 
-order by clause is being formed 
+$columns = '*';
+$select = "SELECT * FROM $table";
+
+$colsToSearch = [];
+$searchStrings = [];
+
+
+$query = "SHOW COLUMNS FROM $table";
+
+$result = $dblink->query($query);
+
+$dbdata = array();
+while ($row = $result->fetch_assoc())  {
+	$dbdata[]=$row;
+	$fieldname = $row['Field'];
+	if( $fieldname !== 'id') {
+		echo fieldname; 
+	}
+
+}
+
+echo json_encode($dbdata);
+
+
+
+?>
+
+
