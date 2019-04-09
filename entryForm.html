@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mock Internal Tool</title>
+	<link rel="stylesheet" href="1.css">
+  </head>
+  <body>
+
+    <section id="content">
+		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
+
+		<p><a id="skiplink" href="#">Skip to table</a></p> 
+
+		<h1>Mock Internal Tool</h1>
+
+		<h2>Input Form</h2>
+		<div id="inputFormContainer"></div>
+		<hr />
+
+
+    </section>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script>
+
+		function getData(){
+			let url = './getTableJSON.php';
+			let jsonObjectsArray = [];
+			$.ajax({
+			  type: 'GET',
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
+
+
+	    function init(){
+			let jsonObjectsArray = getData(); 
+			createInputForm(jsonObjectsArray); 
+		}
+
+
+
+		function createInputForm(jsonObjectsArray) {
+			let inputForm = '';	
+			inputForm += '<form action="./insert.php" method="get">';
+			for (let key in jsonObjectsArray[0]) {
+					let id = key + '_input';
+					inputForm += '<div>';
+					if(key !== 'id'&& key !== 'priority'){
+						inputForm += '<label for="' + id + '"' + '>';
+						inputForm += key + ':';
+						inputForm += '</label>';
+					}
+					if(key === 'id'){
+						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
+					} else {
+						if(key !== 'priority'){
+							inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+						}
+					} 
+					if(key === 'priority'){
+						inputForm += '<label for="' + id + '"' + '>';
+						inputForm += key + ':';
+						inputForm += '</label>';
+						inputForm += '<select id="' + id + '"' + ' name="' + key + '"' + '>';
+                        inputForm += '<option value="1">1</option>';
+                        inputForm += '<option value="2">2</option>';
+                        inputForm += '<option value="3">3</option>';
+                        inputForm += '<option value="4">4</option>';
+                        inputForm += '<option value="5">5</option>';
+						inputForm += '</select>';
+					}
+				inputForm += '</div>';
+
+			} 
+            inputForm += '<input type="submit" value="Add">'; 
+			inputForm += '</form>';
+			$('#inputFormContainer').html(inputForm);
+		} 
+
+		function createFilterForm(jsonObjectsArray) {
+			let filterForm = '';	
+			let defaultSortColumn = 'id';
+	 		let defaultSortDirection = 'DESC'; 
+
+			for (let key in jsonObjectsArray[0]) {
+				if(key !== 'id'){
+					filterForm += '<label for="' + key + 'filterInput"' + '>';
+					filterForm += 'Where ' +  key + ' contains: '; 
+					filterForm += '</label>';
+					filterForm += '<input type="text" id="' + key + 'filterInput"' + 'name="' + key + '">';
+				} 
+			}
+
+            filterForm += '<input type="submit" value="Filter">'; 
+			$('#filterContainer').html(filterForm);
+			$('#filterContainer input[type="submit"]').click(()=>{filter();});
+		} 
+			
+
+		function createSortControls(jsonObjectsArray) {
+			let	sortButtonsHtmlString = ''; 
+			let tableHtmlString;
+			let radioName = "sort";
+			sortButtonsHtmlString += '<div role="radiogroup" aria-label="sorting choices">';
+			for (let key in jsonObjectsArray[0]) {
+				//sort ascending radio buttons
+				sortButtonsHtmlString += '<div class="sortRadio">';
+				sortButtonsHtmlString += '<input type="radio" name="' + radioName + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="ASC"' + ' id="' + key + '_ascending">';
+				sortButtonsHtmlString += '<label for="' + key + '_ascending">';
+				sortButtonsHtmlString += key; 
+				sortButtonsHtmlString += '<span class="offscreenText">'; 
+				sortButtonsHtmlString += 'sort'; 
+				sortButtonsHtmlString += ' ascending'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '<span class="sortArrow" aria-hidden="true">'; 
+				sortButtonsHtmlString += '&uarr;'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '</label>';
+				sortButtonsHtmlString += '</div>';
+
+				//sort descending radio buttons
+				sortButtonsHtmlString += '<div class="sortRadio">';
+				sortButtonsHtmlString += '<input type="radio" name="' + radioName + '" ' + 'data-sortcolumn="' + key + '" '  + 'data-sortdirection="DESC"' + ' id="' + key + '_descending">';
+				sortButtonsHtmlString += '<label for="' + key + '_descending">';
+				sortButtonsHtmlString += key; 
+				sortButtonsHtmlString += '<span class="offscreenText">'; 
+				sortButtonsHtmlString += 'sort'; 
+				sortButtonsHtmlString += ' descending'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '<span class="sortArrow" aria-hidden="true">'; 
+				sortButtonsHtmlString += '&darr;'; 
+				sortButtonsHtmlString += '</span>'; 
+				sortButtonsHtmlString += '</label>'; 
+				sortButtonsHtmlString += '</div>';
+			}
+
+			sortButtonsHtmlString += '</div>';
+			$('#sortButtons').html(sortButtonsHtmlString);
+            $('#sortStatus').text('Now sorting by id descending'); 
+            $('#id_descending').attr('checked','checked'); 
+			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
+		}
+
+    	function createTable(jsonObjectsArray){
+            tableHtmlString = '<table>';
+			tableHtmlString += '<tr>';
+			for (let key in jsonObjectsArray[0]) {
+				tableHtmlString += '<th>';
+				tableHtmlString += key; 
+				tableHtmlString += '</th>';
+			}
+			tableHtmlString += '</tr>';
+			for(let i = 0; i < jsonObjectsArray.length; i++) {
+				tableHtmlString += '<tr>';		
+				for (let key in jsonObjectsArray[i]) {
+					tableHtmlString += '<td>';		
+					if(key === 'id'){
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '&nbsp;<a class="manageLink"href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
+						tableHtmlString += 'manage record ';	
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '</a>';	
+					} else {
+						tableHtmlString += jsonObjectsArray[i][key];	
+					} 	
+					tableHtmlString += '</td>';		
+				}		
+				tableHtmlString += '</tr>';		
+			}
+			tableHtmlString += "</table>";
+			$('#tableContainer').html(tableHtmlString);
+		}
+		
+		init();  
+
+	</script>
+
+  </body>
+</html>
+
