@@ -38,7 +38,7 @@ if (empty($description) || empty($title) || empty($status) || empty($priority)){
 	}
 }
 
-echo '<p><a href="http://www.chrislane.info/examples/filterTable/">Back to Record Entry Form</a></p>'; 
+echo '<p><a href="entryForm.html">Back to Record Entry Form</a></p>'; 
 
 include 'bottom.php';
 
