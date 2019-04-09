@@ -12,10 +12,12 @@
 
 		<p><a id="skiplink" href="#">Skip to table</a></p> 
 
-		<h1>Mock Internal Tool</h1>
+		<h1>CX Guidelines Tool</h1>
 
 		<h2>Input Form</h2>
-		<div id="inputFormContainer"></div>
+		<div id="inputFormContainer">
+			<a href="entryForm.html">Enter a new Record</a> 
+		</div>
 		<hr />
 
 		<h2>Column Filtering </h2>
@@ -85,7 +87,6 @@
 
 	    function init(){
 			let jsonObjectsArray = getData(); 
-			createInputForm(jsonObjectsArray); 
 		    createSortControls(jsonObjectsArray);  
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 			createTable(jsonObjectsArray);
@@ -148,44 +149,6 @@
             $('#filterStatus').text('Now filtering by: ' +  filterMessage); 
 
 		}
-
-		function createInputForm(jsonObjectsArray) {
-			let inputForm = '';	
-			inputForm += '<form action="./insert.php" method="get">';
-			for (let key in jsonObjectsArray[0]) {
-					let id = key + '_input';
-					inputForm += '<div>';
-					if(key !== 'id'&& key !== 'priority'){
-						inputForm += '<label for="' + id + '"' + '>';
-						inputForm += key + ':';
-						inputForm += '</label>';
-					}
-					if(key === 'id'){
-						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
-					} else {
-						if(key !== 'priority'){
-							inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
-						}
-					} 
-					if(key === 'priority'){
-						inputForm += '<label for="' + id + '"' + '>';
-						inputForm += key + ':';
-						inputForm += '</label>';
-						inputForm += '<select id="' + id + '"' + ' name="' + key + '"' + '>';
-                        inputForm += '<option value="1">1</option>';
-                        inputForm += '<option value="2">2</option>';
-                        inputForm += '<option value="3">3</option>';
-                        inputForm += '<option value="4">4</option>';
-                        inputForm += '<option value="5">5</option>';
-						inputForm += '</select>';
-					}
-				inputForm += '</div>';
-
-			} 
-            inputForm += '<input type="submit" value="Add">'; 
-			inputForm += '</form>';
-			$('#inputFormContainer').html(inputForm);
-		} 
 
 		function createFilterForm(jsonObjectsArray) {
 			let filterForm = '';	

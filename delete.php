@@ -16,7 +16,8 @@ if (mysqli_query($dblink, $query) && $id)
   		echo("<p class="/error/">ERROR: Query Failed</p>");
 }
 
-echo '<a href="http://www.chrislane.info/examples/filterTable/">Back to table</a>'; 
+echo '<a href="index">Home</a>'; 
+
 
 include 'bottom.php';
 
