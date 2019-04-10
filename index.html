@@ -79,7 +79,6 @@
 		}
 
 		function getFilteredData(query){
-			console.log(query);
 			let url = './filter.php?' + query;
 			let jsonObjectsArray = [];
 			$.ajax({
@@ -92,6 +91,19 @@
 			return jsonObjectsArray;
 		}
 
+		function getPresetFilteredData(orderBy){
+			let url = './presetFilter.php?orderBy=' + orderBy;
+			let jsonObjectsArray = [];
+			$.ajax({
+			  type: "GET",
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
+	
 	    function init(){
 			let jsonObjectsArray = getData(); 
 		    createSortControls(jsonObjectsArray);  
@@ -158,6 +170,11 @@
 
 		}
 
+		function presetFilter(orderBy){
+			let jsonObjectsArray = getPresetFilteredData(orderBy); 
+			createTable(jsonObjectsArray);
+		}
+
 		function createFilterForm(jsonObjectsArray) {
 			let filterForm = '';	
 			let defaultSortColumn = 'id';
@@ -181,7 +198,9 @@
 			let searchStrings = ['aa', 'bb', 'ccc']; 
 			let presetFilterForm = '';	
 			let defaultSortColumn = 'id';
-	 		let defaultSortDirection = 'DESC'; 
+	 		let defaultSortDirection = 'DESC';
+
+			let orderBy = 'ORDER BY ' +  defaultSortColumn + defaultSortDirection;
             
 			for(let i=0; i < searchStrings.length; i++){
 				console.log(searchStrings[i]);
@@ -194,10 +213,10 @@
 
 			} 
 
-
-            presetFilterForm += '<input type="submit" value="Filter">'; 
+            presetFilterForm += '<input type="submit" value="Preset Filter">'; 
 			$('#presetFilterContainer').html(presetFilterForm);
-			$('#presetFilterContainer input[type="submit"]').click(()=>{filter();});
+			$('#presetFilterContainer input[type="submit"]').click(()=>{presetFilter(orderBy);});
+
 		} 
 
 		function createSortControls(jsonObjectsArray) {
