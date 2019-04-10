@@ -40,15 +40,9 @@ for($i = 0; $i < $numSearchTerms; $i++){
 	} 
 }
 
-/*
-SELECT * FROM cards WHERE description LIKE '%test%' OR title LIKE '%test%' OR status LIKE '%test%' OR priority LIKE '%test%' OR description LIKE '%aaa%' OR title LIKE '%aaa%' OR status LIKE '%aaa%' OR priority LIKE '%aaa%' OR description LIKE '%bb%' OR title LIKE '%bb%' OR status LIKE '%bb%' OR priority LIKE '%bb%'
-*/
 
+$selectQuery = "SELECT * FROM $table $where $orderBy";
 
-//$selectQuery = "SELECT * FROM $table $where $orderBy";
-$selectQuery = "SELECT * FROM $table $where $orderBy LIMIT 1";
-
-//echo $selectQuery;
 
 $selectResult = $dblink->query($selectQuery);
 
