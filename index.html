@@ -190,6 +190,9 @@
 			let filterMessage = '';
 			for(let i = 0; i < searchTerms.length; i++) {
 				filterMessage += searchTerms[i];
+				if(i < searchTerms.length - 1){
+					filterMessage += ', ';
+				} 
 			}
             $('#presetFilterStatus').text('Now filtering all columns by: ' +  filterMessage); 
 
