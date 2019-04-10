@@ -45,7 +45,8 @@ SELECT * FROM cards WHERE description LIKE '%test%' OR title LIKE '%test%' OR st
 */
 
 
-$selectQuery = "SELECT * FROM $table $where $orderBy";
+//$selectQuery = "SELECT * FROM $table $where $orderBy";
+$selectQuery = "SELECT * FROM $table $where $orderBy LIMIT 1";
 
 //echo $selectQuery;
 
