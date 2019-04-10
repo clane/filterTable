@@ -11,7 +11,7 @@
     <section id="content">
 		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
 
-		<p><a id="skiplink" href="#tableh2">Skip to the CX Guidelines Table</a></p> 
+		<p><a class="offscreenText" id="skiplink" href="#tableh2">Skip to the CX Guidelines Table</a></p> 
 
 		<h1>CX Guidelines Tool</h1>
 		<hr />
@@ -119,9 +119,19 @@
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 		    createPresetFilterForm();  
 			createTable(jsonObjectsArray);
+
+			//manage skip link visibility
+			$('#skiplink').focus(()=>{ 
+				$('#skiplink').removeClass('offscreenText');
+			});
+			$('#skiplink').blur(()=>{ 
+				$('#skiplink').addClass('offscreenText');
+			});
 			$('#skiplink').click(()=>{ 
 				$('#tableh2').focus(); 
 			});
+
+
 		}
 
 	    function sort(e){
