@@ -196,12 +196,14 @@
 
 			let filterMessage = '';
 			for(let i = 0; i < searchTerms.length; i++) {
+				filterMessage += '"';
 				filterMessage += searchTerms[i];
+				filterMessage += '"';
 				if(i < searchTerms.length - 1){
 					filterMessage += ', ';
 				} 
 			}
-            $('#presetFilterStatus').text('Now filtering all columns by the following preset search terms: ' +  '"' + filterMessage + '"'); 
+            $('#presetFilterStatus').text('Now filtering all columns by the following preset search terms: ' + filterMessage ); 
 
 		}
 
