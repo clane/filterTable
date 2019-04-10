@@ -36,6 +36,9 @@ for($i = 0; $i < $numSearchTerms; $i++){
 		  $where .= " OR ";
 		}
 	}
+	if($i < ($numSearchTerms - 1)){
+	  $where .= " OR ";
+	} 
 }
 
 //$selectQuery = "SELECT * FROM $table $where $orderBy";
