@@ -9,6 +9,24 @@ $where = 'WHERE ';
 $result = $dblink->query($query);
 $dbdata = array();
 
+$sortColumn = $_GET['filter_sort_column'];
+$sortDirection = $_GET['filter_sort_direction'];
+$orderBy = "ORDER BY $sortColumn $sortDirection";
+
+//<input type="checkbox" name="presetSearchTerm_0" value="test">
+
+//get the search strings
+foreach($_GET as $key => $value){
+    if($key && $value) {
+        if($key != 'filter_sort_column' && $key != 'filter_sort_direction'){
+            array_push($colsToSearch, $key);
+            array_push($searchStrings, $value);
+        }
+    }
+}
+
+
+//get the column names
 while ($row = $result->fetch_assoc())  {
 	$dbdata[]=$row;
 	$fieldname = $row['Field'];
@@ -17,6 +35,7 @@ while ($row = $result->fetch_assoc())  {
 	}
 }
 
+//create the where clause
 for($i = 0; $i < sizeOf($colsToSearch); $i++){
 	$where .= "$colsToSearch[$i] ";
 	$where .= "LIKE '%" . $searchTerm . "%'"; 
@@ -25,7 +44,7 @@ for($i = 0; $i < sizeOf($colsToSearch); $i++){
 	} 
 }
 
-$selectQuery = "SELECT * FROM $table $where";
+$selectQuery = "SELECT * FROM $table $where $orderBy";
 
 $selectResult = $dblink->query($selectQuery);
 

@@ -39,8 +39,9 @@
 		<h3>Sorting Status</h3>
 		<div id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></div>
 		<h3>Filter Status</h3>
-		<div id="filterStatus" aria-live="polite" data-filtercol="" data-filterstring=""></div>
-
+		<div id="filterStatus" aria-live="polite"></div>
+		<h3>Preset Filter Status</h3>
+		<div id="presetFilterStatus" aria-live="polite"></div>
 		<hr />
 
 		<h2 id="tableh2" tabindex="-1">Table</h2>
@@ -91,8 +92,9 @@
 			return jsonObjectsArray;
 		}
 
-		function getPresetFilteredData(orderBy){
-			let url = './presetFilter.php?orderBy=' + orderBy;
+		function getPresetFilteredData(searchTerms,sortCol,sortDir){
+			let url = './presetFilter.php?=searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
+			console.log(url);
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: "GET",
@@ -130,7 +132,7 @@
 			createTable(jsonObjectsArray);
 		} 
 
-		function filter(e){
+		function filter(){
 			let length = $("#filterContainer input[type='text']").length;
 			let query = '';
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
@@ -170,9 +172,20 @@
 
 		}
 
-		function presetFilter(orderBy){
-			let jsonObjectsArray = getPresetFilteredData(orderBy); 
-			createTable(jsonObjectsArray);
+		function presetFilter(){
+
+			let sortCol = $("#sortStatus").attr('data-sortcol'); 
+			let sortDir = $("#sortStatus").attr('data-sortdir'); 
+			let searchTerms = []; 
+			let length = $("#presetFilterContainer input[type='checkbox']:checked").length;
+
+            $("#presetFilterContainer input[type='checkbox']:checked").each(function() {
+				searchTerms.push($(this).val());
+	        }); 
+	
+			console.log(searchTerms); 
+			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
+			//createTable(jsonObjectsArray);
 		}
 
 		function createFilterForm(jsonObjectsArray) {
@@ -208,14 +221,16 @@
 				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
 				presetFilterForm += searchStrings[i];
 				presetFilterForm += '</label>';
-				presetFilterForm += '<input type="checkbox" id="presetSearchTerm_' + i + '">';
+				presetFilterForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
+				presetFilterForm += ' value="' + searchStrings[i] + '"';
+				presetFilterForm += '>';
 				presetFilterForm += '</div>';
 
 			} 
 
             presetFilterForm += '<input type="submit" value="Preset Filter">'; 
 			$('#presetFilterContainer').html(presetFilterForm);
-			$('#presetFilterContainer input[type="submit"]').click(()=>{presetFilter(orderBy);});
+			$('#presetFilterContainer input[type="submit"]').click(()=>{presetFilter();});
 
 		} 
 
