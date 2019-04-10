@@ -231,15 +231,14 @@
 			let orderBy = 'ORDER BY ' +  defaultSortColumn + defaultSortDirection;
             
 			for(let i=0; i < searchStrings.length; i++){
-				console.log(searchStrings[i]);
 				presetFilterForm += '<div class="checkboxContainer">';
-				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
-				presetFilterForm += searchStrings[i];
-				presetFilterForm += '</label>';
 				presetFilterForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
 				presetFilterForm += ' value="' + searchStrings[i] + '"';
 				presetFilterForm += '>';
-				presetFilterForm += '</div>';
+				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
+				presetFilterForm += searchStrings[i];
+				presetFilterForm += '</label>';
+								presetFilterForm += '</div>';
 
 			} 
 
