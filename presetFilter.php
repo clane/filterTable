@@ -13,7 +13,6 @@ $sortDirection = $_GET['sortDir'];
 //$searchTermsString = $_GET['searchTerms'];
 $searchTermsString = 'test,aaa,bb';
 $searchTermsArray = explode(",",$searchTermsString);
-;
 $orderBy = "ORDER BY $sortColumn $sortDirection";
 
 //get the column names
@@ -25,22 +24,24 @@ while ($row = $result->fetch_assoc())  {
 	}
 }
 
-for($i = 0; $i < sizeOf($searchTermsArray); $i++){
+$numSearchTerms = sizeOf($searchTermsArray);
+$numCols = sizeOf($colsToSearch);
+
+for($i = 0; $i < $numSearchTerms; $i++){
 	//create the where clause
-	for($j = 0; $j < sizeOf($colsToSearch); $j++){
+	for($j = 0; $j < $numCols; $j++){
 		$where .= "$colsToSearch[$j] ";
 		$where .= "LIKE '%" . $searchTermsArray[$i] . "%'"; 
-		if($j < (sizeOf($colsToSearch) - 1))  {
-			$where .= " OR ";
-		} 
+		if($j < ($numCols - 1) ) {
+		  $where .= " OR ";
+		}
 	}
 }
 
 //$selectQuery = "SELECT * FROM $table $where $orderBy";
 $selectQuery = "SELECT * FROM $table $where";
-echo $where;
-echo $selectQuery;
 
+echo $selectQuery;
 
 $selectResult = $dblink->query($selectQuery);
 
@@ -53,7 +54,7 @@ while ( $row = $selectResult->fetch_assoc())  {
 }
 
 //Print array in JSON format
-// echo json_encode($dbdata);
+echo json_encode($dbdata);
 
 
 ?>
