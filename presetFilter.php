@@ -10,8 +10,10 @@ $result = $dblink->query($query);
 $dbdata = array();
 $sortColumn = $_GET['sortCol'];
 $sortDirection = $_GET['sortDir'];
-$searchTermsString = $_GET['searchTerms'];
+//$searchTermsString = $_GET['searchTerms'];
+$searchTermsString = 'test,aaa,bb';
 $searchTermsArray = explode(",",$searchTermsString);
+;
 $orderBy = "ORDER BY $sortColumn $sortDirection";
 
 //get the column names
@@ -34,7 +36,11 @@ for($i = 0; $i < sizeOf($searchTermsArray); $i++){
 	}
 }
 
-$selectQuery = "SELECT * FROM $table $where $orderBy";
+//$selectQuery = "SELECT * FROM $table $where $orderBy";
+$selectQuery = "SELECT * FROM $table $where";
+echo $where;
+echo $selectQuery;
+
 
 $selectResult = $dblink->query($selectQuery);
 
@@ -47,7 +53,8 @@ while ( $row = $selectResult->fetch_assoc())  {
 }
 
 //Print array in JSON format
- echo json_encode($dbdata);
+// echo json_encode($dbdata);
+
 
 ?>
 

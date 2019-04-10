@@ -183,8 +183,10 @@
 				searchTerms.push($(this).val());
 	        }); 
 	
-			console.log(searchTerms); 
 			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
+
+			console.log(jsonObjectsArray); 
+
 			//createTable(jsonObjectsArray);
 		}
 
