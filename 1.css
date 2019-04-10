@@ -58,6 +58,11 @@
 				#filterContainer  label  { width:40%;  } 
 				/* END Filter Form */
 
+				/* BEGIN Preset Filter Form */
+                #presetFilterContainer { display:flex; } 
+        		.checkboxContainer { display:flex; width:15%; border:1px solid #000; padding:5px;  margin:10px 10px;  border-radius:5px; } 
+				/* END Preset Filter Form */
+
 				/* BEGIN Manage Links */
 				.manageLink { font-size:1rem; } 
 				/* END  Manage Links */
