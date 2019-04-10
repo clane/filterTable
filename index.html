@@ -186,6 +186,13 @@
 			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
 
 			createTable(jsonObjectsArray);
+
+			let filterMessage = '';
+			for(let i = 0; i < searchTerms.length; i++) {
+				filterMessage += searchTerms[i];
+			}
+            $('#presetFilterStatus').text('Now filtering all columns by: ' +  filterMessage); 
+
 		}
 
 		function createFilterForm(jsonObjectsArray) {
