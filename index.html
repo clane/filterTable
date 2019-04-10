@@ -93,7 +93,7 @@
 		}
 
 		function getPresetFilteredData(searchTerms,sortCol,sortDir){
-			let url = './presetFilter.php?=searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
+			let url = './presetFilter.php?searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
 			console.log(url);
 			let jsonObjectsArray = [];
 			$.ajax({

@@ -3,21 +3,20 @@
 include 'dbVars.php';
 
 $colsToSearch = [];
-$searchTerm = 'test';
 $query = "SHOW COLUMNS FROM $table";
 $where = 'WHERE ';
 $result = $dblink->query($query);
-$dbdata = array();
+$dbdata1 = array();
+$dbdata2 = array();
 $sortColumn = $_GET['sortCol'];
 $sortDirection = $_GET['sortDir'];
-//$searchTermsString = $_GET['searchTerms'];
-$searchTermsString = 'test,aaa,bb';
+$searchTermsString = $_GET['searchTerms'];
 $searchTermsArray = explode(",",$searchTermsString);
 $orderBy = "ORDER BY $sortColumn $sortDirection";
 
 //get the column names
 while ($row = $result->fetch_assoc())  {
-	$dbdata[]=$row;
+	$dbdata1[]=$row;
 	$fieldname = $row['Field'];
 	if( $fieldname !== 'id') {
 		array_push($colsToSearch, $fieldname); 
@@ -41,23 +40,25 @@ for($i = 0; $i < $numSearchTerms; $i++){
 	} 
 }
 
-//$selectQuery = "SELECT * FROM $table $where $orderBy";
-$selectQuery = "SELECT * FROM $table $where";
+/*
+SELECT * FROM cards WHERE description LIKE '%test%' OR title LIKE '%test%' OR status LIKE '%test%' OR priority LIKE '%test%' OR description LIKE '%aaa%' OR title LIKE '%aaa%' OR status LIKE '%aaa%' OR priority LIKE '%aaa%' OR description LIKE '%bb%' OR title LIKE '%bb%' OR status LIKE '%bb%' OR priority LIKE '%bb%'
+*/
 
-echo $selectQuery;
+
+$selectQuery = "SELECT * FROM $table $where $orderBy";
+
+//echo $selectQuery;
 
 $selectResult = $dblink->query($selectQuery);
 
-//Initialize array variable
-$dbdata = array();
 
 //Fetch into associative array
-while ( $row = $selectResult->fetch_assoc())  {
-		$dbdata[]=$row;
+while ( $row2 = $selectResult->fetch_assoc())  {
+		$dbdata2[]=$row2;
 }
 
 //Print array in JSON format
-echo json_encode($dbdata);
+echo json_encode($dbdata2);
 
 
 ?>
