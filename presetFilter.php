@@ -10,7 +10,8 @@ $result = $dblink->query($query);
 $dbdata = array();
 $sortColumn = $_GET['sortCol'];
 $sortDirection = $_GET['sortDir'];
-$searchTerms = $_GET['searchTerms'];
+$searchTermsString = $_GET['searchTerms'];
+$searchTermsArray = explode(",",$searchTermsString);
 $orderBy = "ORDER BY $sortColumn $sortDirection";
 
 //get the column names
@@ -22,11 +23,11 @@ while ($row = $result->fetch_assoc())  {
 	}
 }
 
-for($i = 0; $i < sizeOf($searchTerms); $i++){
+for($i = 0; $i < sizeOf($searchTermsArray); $i++){
 	//create the where clause
 	for($j = 0; $j < sizeOf($colsToSearch); $j++){
 		$where .= "$colsToSearch[$j] ";
-		$where .= "LIKE '%" . $searchTerms[$i] . "%'"; 
+		$where .= "LIKE '%" . $searchTermsArray[$i] . "%'"; 
 		if($j < (sizeOf($colsToSearch) - 1))  {
 			$where .= " OR ";
 		} 
