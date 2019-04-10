@@ -3,7 +3,7 @@
 include 'dbVars.php';
 
 $colsToSearch = [];
-$searchTerm = 'aaaaaa';
+$searchTerm = 'test';
 $query = "SHOW COLUMNS FROM $table";
 $where = 'WHERE ';
 $result = $dblink->query($query);
@@ -18,7 +18,8 @@ while ($row = $result->fetch_assoc())  {
 }
 
 for($i = 0; $i < sizeOf($colsToSearch); $i++){
-	$where .= "$colsToSearch[$i]=\"$searchTerm\"";
+	$where .= "$colsToSearch[$i] ";
+	$where .= "LIKE '%" . $searchTerm . "%'"; 
 	if($i < (sizeOf($colsToSearch) - 1))  {
 		$where .= " OR ";
 	} 
@@ -38,7 +39,6 @@ while ( $row = $selectResult->fetch_assoc())  {
 
 //Print array in JSON format
  echo json_encode($dbdata);
-
 
 ?>
 
