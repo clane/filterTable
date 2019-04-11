@@ -47,7 +47,7 @@
 			for (let key in jsonObjectsArray[0]) {
 					let id = key + '_input';
 					inputForm += '<div>';
-					if(key !== 'id'&& key !== 'priority'){
+					if(key !== 'id'){
 						inputForm += '<label for="' + id + '"' + '>';
 						inputForm += key + ':';
 						inputForm += '</label>';
@@ -55,22 +55,9 @@
 					if(key === 'id'){
 						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
 					} else {
-						if(key !== 'priority'){
-							inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
-						}
+						inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
 					} 
-					if(key === 'priority'){
-						inputForm += '<label for="' + id + '"' + '>';
-						inputForm += key + ':';
-						inputForm += '</label>';
-						inputForm += '<select id="' + id + '"' + ' name="' + key + '"' + '>';
-                        inputForm += '<option value="1">1</option>';
-                        inputForm += '<option value="2">2</option>';
-                        inputForm += '<option value="3">3</option>';
-                        inputForm += '<option value="4">4</option>';
-                        inputForm += '<option value="5">5</option>';
-						inputForm += '</select>';
-					}
+
 				inputForm += '</div>';
 
 			} 
