@@ -126,6 +126,7 @@
 		    createSortControls(jsonObjectsArray);  
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 		    createPresetFilterForm();  
+		    createUserDefinedFilterForm();  
 			createTable(jsonObjectsArray);
 
 			//manage skip link visibility
@@ -268,6 +269,14 @@
 			$('#presetFilterButton').click(()=>{presetFilter();});
 
 		} 
+		    
+
+		function createUserDefinedFilterForm(){
+
+
+		} 
+
+
 
 		function createSortControls(jsonObjectsArray) {
 			let	sortButtonsHtmlString = ''; 
