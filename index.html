@@ -273,7 +273,15 @@
 
 		function createUserDefinedFilterForm(){
 
+			let userDefinedFilterForm = '';	
+			let id = 'userDefinedFilterInput';	
+			userDefinedFilterForm += '<label for="userDefinedFilterInput">';
+			userDefinedFilterForm += 'Enter Filter Term';
+			userDefinedFilterForm += '</label>';
+			userDefinedFilterForm += '<input type="text" id="' + id + '">';
 
+			$('#userDefinedAllFilterContainer').html(userDefinedFilterForm);
+			//$('#presetFilterButton').click(()=>{presetFilter();});
 		} 
 
 
