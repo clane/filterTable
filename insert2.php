@@ -30,12 +30,11 @@ if($emptyArgsCnt === 0){
 	$query .= $colNamesString . ')';
 	$query .=  ' VALUES (';
 	$query .= $colValuesString . ')';
-	echo $query;
 
 	if ($result = mysqli_query($dblink, $query)) {
-        echo '<p>Query succeeded!</p>';
+        echo '<p>A new record has been created</p>';
     } else {
-        echo '<p class="error">Query failed!</p>';
+        echo '<p class="error">The attempt to add a new record has failed</p>';
 	} 
 
 
@@ -47,6 +46,8 @@ if($emptyArgsCnt === 0){
 
 }
 
+echo '<p><a href="entryForm.html">Back to Record Entry Form</a></p>'; 
+echo '<p><a href="index.html">Home</a></p>';
 
 include 'bottom.php';
 

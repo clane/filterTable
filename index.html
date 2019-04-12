@@ -27,10 +27,16 @@
 		<div id="sortButtons"></div>
 		<hr />
 
+		<h2>Filter all columns using a user defined search term</h2>
+		<p>Filter all columns by one or more of the preset search terms below.</p> 
+		<div id="userDefinedAllFilterContainer"></div> 
+ 		<input id="userDefinedAllFilterButton" type="submit" value="Submit User Defined Filter"> 
+		<hr />
+
 		<h2>Filter all columns using preset search terms</h2>
 		<p>Filter all columns by one or more of the preset search terms below.</p> 
 		<div id="presetFilterContainer"></div> 
- 		<input id="presetFilterButton" type="submit" value="Preset Filter"> 
+ 		<input id="presetFilterButton" type="submit" value="Submit Preset Filters"> 
 		<hr />
 
 		<h2>Column Filtering using user defined search terms</h2>
@@ -42,6 +48,8 @@
 
 		<h3>Sorting Status</h3>
 		<div id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></div>
+		<h3>Filtering using user defined search terms</h3>
+		<div id="userDefinedAllFilterStatus" aria-live="polite">No user defined preset filters applied</div>
 
 		<h3>Filtering using preset search terms</h3>
 		<div id="presetFilterStatus" aria-live="polite">No preset filters applied</div>
