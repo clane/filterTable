@@ -57,9 +57,7 @@
 		<div id="filterStatus" aria-live="polite">No filtering using user defined filter values against individual columns has been applied</div>
 
 		<h3>Search Status</h3>
-		<div id="filterStatus" aria-live="polite">No search terms have been applied</div>
-
-
+		<div id="searchStatus" aria-live="polite">No search terms have been applied</div>
 
 		<hr />
 
@@ -205,10 +203,10 @@
 			let sortDir = $("#sortStatus").attr('data-sortdir');
 			let searchTerms = [];
             let searchTerm = $("#searchInput").val();
-			searchTerms.push(searchTerm); 
+			searchTerms.push(searchTerm);//passing single item as array to use getPresetFilteredData() 
 			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
-
 			createTable(jsonObjectsArray);
+			$('#searchStatus').text('Now displaying results the from search term "' + searchTerm + '"');  
 		} 
 
 		function presetFilter(){
@@ -274,7 +272,7 @@
 				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
 				presetFilterForm += searchStrings[i];
 				presetFilterForm += '</label>';
-								presetFilterForm += '</div>';
+				presetFilterForm += '</div>';
 
 			} 
 
