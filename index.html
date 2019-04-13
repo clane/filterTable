@@ -11,7 +11,7 @@
     <section id="content">
 		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
 
-		<p><a class="offscreenText" id="skiplink" href="#tableh2">Skip to the CX Guidelines Table</a></p> 
+		<p><a id="skiplink" href="#tableh2">Skip to the CX Guidelines Table</a></p> 
 
 		<h1>CX Guidelines Tool</h1>
 		<hr />
@@ -29,8 +29,8 @@
 
 		<h2>Filter all columns using a user defined search term</h2>
 		<p>Filter all columns by one or more of the preset search terms below.</p> 
-		<div id="userDefinedAllFilterContainer"></div> 
- 		<input id="userDefinedAllFilterButton" type="submit" value="Submit User Defined Filter"> 
+		<div id="searchContainer"></div> 
+		<input type="submit" id="searchButton" value="Search">'
 		<hr />
 
 		<h2>Filter all columns using preset search terms</h2>
@@ -126,7 +126,7 @@
 		    createSortControls(jsonObjectsArray);  
 			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 		    createPresetFilterForm();  
-		    createUserDefinedFilterForm();  
+		    createSearchForm();  
 			createTable(jsonObjectsArray);
 
 			//manage skip link visibility
@@ -139,8 +139,6 @@
 			$('#skiplink').click(()=>{ 
 				$('#tableh2').focus(); 
 			});
-
-
 		}
 
 	    function sort(e){
@@ -197,6 +195,17 @@
             $('#filterStatus').text('Now filtering by: ' +  filterMessage); 
 
 		}
+
+		function search() {
+			let sortCol = $("#sortStatus").attr('data-sortcol'); 
+			let sortDir = $("#sortStatus").attr('data-sortdir');
+			let searchTerms = [];
+            let searchTerm = $("#searchInput").val();
+			searchTerms.push(searchTerm); 
+			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
+
+			createTable(jsonObjectsArray);
+		} 
 
 		function presetFilter(){
 
@@ -269,22 +278,18 @@
 			$('#presetFilterButton').click(()=>{presetFilter();});
 
 		} 
-		    
 
-		function createUserDefinedFilterForm(){
+		function createSearchForm(){
+			let searchForm = '';	
+			let id = 'searchInput';	
+			searchForm += '<label for="' + id + '">';
+			searchForm += 'Enter Filter Term';
+			searchForm += '</label>';
+			searchForm += '<input type="text" id="' + id + '">';
 
-			let userDefinedFilterForm = '';	
-			let id = 'userDefinedFilterInput';	
-			userDefinedFilterForm += '<label for="userDefinedFilterInput">';
-			userDefinedFilterForm += 'Enter Filter Term';
-			userDefinedFilterForm += '</label>';
-			userDefinedFilterForm += '<input type="text" id="' + id + '">';
-
-			$('#userDefinedAllFilterContainer').html(userDefinedFilterForm);
-			//$('#presetFilterButton').click(()=>{presetFilter();});
+			$('#searchContainer').html(searchForm);
+			$('#searchButton').click(()=>{search();});
 		} 
-
-
 
 		function createSortControls(jsonObjectsArray) {
 			let	sortButtonsHtmlString = ''; 
