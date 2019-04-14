@@ -5,6 +5,7 @@
     <title>CX Guidelines Tool</title>
 
 	<link rel="stylesheet" href="1.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap-master/css/accordion.css">
   </head>
   <body>
 
@@ -15,11 +16,23 @@
 
 		<h1>CX Guidelines Tool</h1>
 		<hr />
-
-		<h2>Input Form</h2>
-		<div id="inputFormContainer">
-			<a href="entryForm.html">Enter a new Record</a> 
+		<div 
+			role="link" 
+			class="accAccordion" 
+			data-internal="inputFormContainer" 
+			data-role="Accordion" 
+			data-openstate="Expanded" 
+			data-insert="accordionContainer1" 
+			data-group="sharedGroupName" 
+			id="accordion1" 
+		> 
+			<h2>Input Form</h2>
 		</div>
+
+		<div id="inputFormContainer">
+			<a href="entryForm.html">Entry Form</a> 
+		</div>
+		<div id="accordionContainer1"></div>
 		<hr />
 
 		<h2>Column Sorting Controls</h2>
@@ -63,6 +76,10 @@
     </section>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="bootstrap-master/js/Acc.DC.API.js"></script>
+	<script type="text/javascript" src="bootstrap-master/js/modules/acordion_generator.min.js"></script>
+	<script type="text/javascript" src="bootstrap-master/js/accdc_bootstrap.js"></script>
 
 	<script>
 
