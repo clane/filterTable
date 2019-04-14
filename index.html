@@ -46,6 +46,7 @@
 		<h2>Status</h2>
 
 		<ul>
+		<li><span id="count" aria-live="polite">0 results</span></li>
 		<li><span id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></span></li>
 		<li><span id="userDefinedAllFilterStatus" aria-live="polite">No user defined preset filters applied</span></li>
 		<li><span id="presetFilterStatus" aria-live="polite">No filtering using preset fllter values against all columns has been applied</span></li>
@@ -360,6 +361,7 @@
 			}
 			tableHtmlString += "</table>";
 			$('#tableContainer').html(tableHtmlString);
+			$('#count').text(jsonObjectsArray.length + ' results');
 		}
 		
 		init();  
