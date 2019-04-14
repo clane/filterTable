@@ -15,7 +15,9 @@
 		<p><a id="skiplink" href="#tableh2">Skip to the CX Guidelines Table</a></p> 
 
 		<h1>CX Guidelines Tool</h1>
-		<hr />
+
+
+		<!-- BEGIN ACCORDION 1 --> 
 		<div 
 			role="link" 
 			class="accAccordion" 
@@ -28,33 +30,59 @@
 		> 
 			<h2>Input Form</h2>
 		</div>
-
 		<div id="inputFormContainer">
 			<a href="entryForm.html">Entry Form</a> 
 		</div>
 		<div id="accordionContainer1"></div>
-		<hr />
+		<!-- END ACCORDION 1 --> 
 
-		<h2>Column Sorting Controls</h2>
-		<p>Select a radio button to set the sorting order of the table</p> 
+
+
+		<!-- BEGIN ACCORDION 2 --> 
+		<div 
+			role="link" 
+			class="accAccordion" 
+			data-internal="sortButtons" 
+			data-role="Accordion" 
+			data-openstate="Expanded" 
+			data-insert="accordionContainer2" 
+			data-group="sharedGroupName" 
+			id="accordion2" 
+		> 
+			<h2>Column Sorting Controls</h2>
+		</div>
 		<div id="sortButtons"></div>
-		<hr />
+		<div id="accordionContainer2"></div>
 
-		<h2>Search</h2>
+		<!-- END ACCORDION 2 --> 
+
+		<!-- BEGIN ACCORDION 3 --> 
+		<div 
+			role="link" 
+			class="accAccordion" 
+			data-internal="searchContainer" 
+			data-role="Accordion" 
+			data-openstate="Expanded" 
+			data-insert="accordionContainer3" 
+			data-group="sharedGroupName" 
+			id="accordion3" 
+		> 
+			<h2>Search</h2>
+		</div>
 		<div id="searchContainer"></div> 
+		<div id="accordionContainer3"></div>
 		<input type="submit" id="searchButton" value="Search">'
-		<hr />
+		<!-- END ACCORDION 3 --> 
+
 
 		<h2>Filter all columns using preset search terms</h2>
 		<p>Filter all columns by one or more of the preset search terms below.</p> 
 		<div id="presetFilterContainer"></div> 
  		<input id="presetFilterButton" type="submit" value="Submit Preset Filters"> 
-		<hr />
 
 		<h2>Column Filtering using user defined search terms</h2>
 		<p>Enter a search term for one more columns using the form below.</p> 
 		<div id="filterContainer"></div>
-		<hr />
 
 		<h2>Status</h2>
 
@@ -66,9 +94,6 @@
 		<li><span id="filterStatus" aria-live="polite">No filtering using user defined filter values against individual columns has been applied</span></li>
 		<li><span id="searchStatus" aria-live="polite">No search terms have been applied</span></li>
 		</ul>
-
-
-		<hr />
 
 		<h2 id="tableh2" tabindex="-1">CX Guidelines Table</h2>
 		<section id="tableContainer"></section>
