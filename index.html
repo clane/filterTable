@@ -71,7 +71,6 @@
 		</div>
 		<div id="searchContainer"></div> 
 		<div id="accordionContainer3"></div>
-		<input type="submit" id="searchButton" value="Search">'
 		<!-- END ACCORDION 3 --> 
 
 
@@ -326,7 +325,7 @@
 			searchForm += 'Enter Search Term';
 			searchForm += '</label>';
 			searchForm += '<input type="text" id="' + id + '">';
-
+			searchForm += '<input type="submit" id="searchButton" value="Search">';
 			$('#searchContainer').html(searchForm);
 			$('#searchButton').click(()=>{search();});
 		} 
