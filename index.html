@@ -350,7 +350,9 @@
 						tableHtmlString += jsonObjectsArray[i][key];	
 						tableHtmlString += '&nbsp;<a class="manageLink"href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
 						tableHtmlString += 'manage record ';	
+						tableHtmlString += '<span class="offscreenText">';	
 						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '</span>'; 	
 						tableHtmlString += '</a>';	
 					} else {
 						tableHtmlString += jsonObjectsArray[i][key];	
