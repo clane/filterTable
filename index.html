@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>CX Guidelines Tool</title>
-
 	<link rel="stylesheet" href="1.css">
-	<link rel="stylesheet" type="text/css" href="bootstrap-master/css/accordion.css">
   </head>
   <body>
 
@@ -75,7 +73,7 @@
 		<div 
 			role="link" 
 			class="accAccordion" 
-			data-internal="presetFilterContainer" 
+			data-internal="presetSearchContainer" 
 			data-role="Accordion" 
 			data-openstate="Expanded" 
 			data-insert="accordionContainer4" 
@@ -84,7 +82,7 @@
 		> 
 			<h2>Preset Searches</h2>
 		</div>
-		<div id="presetFilterContainer"></div> 
+		<div id="presetSearchContainer"></div> 
 		<div id="accordionContainer4"></div>
 		<!-- END ACCORDION 4 --> 
 
@@ -92,9 +90,8 @@
 
 		<ul>
 		<li><span id="count" aria-live="polite">0 results</span></li>
-		<li><span id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></span></li>
-		<li><span id="presetFilterStatus" aria-live="polite">No filtering using preset fllter values against all columns has been applied</span></li>
-		<li><span id="searchStatus" aria-live="polite">No search terms have been applied</span></li>
+		<li><span id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC"></span></li>
+		<li><span id="searchStatus" aria-live="polite" data-searchTerms>No search terms have been applied</span></li>
 		</ul>
 
 		<h2 id="tableh2" tabindex="-1">CX Guidelines Table</h2>
@@ -110,36 +107,22 @@
 
 	<script>
 
-		function getData(){
-			let url = './getTableJSON.php';
-			let jsonObjectsArray = [];
-			$.ajax({
-			  type: 'GET',
-			  url: url,
-			  dataType: 'json',
-			  success: function(data) { jsonObjectsArray = data;},
-			  async: false
-			});
-			return jsonObjectsArray;
-		}
+		function getSearchData(sortCol,sortDir,searchTerms){
 
-   		function getDataForSort(orderBy){
-			let url = './getTableJSON.php?orderby=' + orderBy;
-			let jsonObjectsArray = [];
-			$.ajax({
-			  type: "GET",
-			  url: url,
-			  dataType: 'json',
-			  success: function(data) { jsonObjectsArray = data;},
-			  async: false
-			});
-			return jsonObjectsArray;
-		}
+			if(!searchTerms){
+				let searchTerms = 'NULL';
+			}
 
-		function getPresetFilteredData(searchTerms,sortCol,sortDir){
-			let url = './presetFilter.php?searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
-			console.log(url);
+			if(!sortCol){
+				let searchTerms = 'NULL';
+			}
+
+			if(!sortDir){
+				let searchTerms = 'NULL';
+			}
+
 			let jsonObjectsArray = [];
+			let url = 'search.php?searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
 			$.ajax({
 			  type: "GET",
 			  url: url,
@@ -151,7 +134,10 @@
 		}
 	
 	    function init(){
-			let jsonObjectsArray = getData(); 
+			let sortCol = 'id';
+            let sortDir = 'DESC';
+			let searchTerms = false;
+			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 		    createSortControls(jsonObjectsArray);  
 		    createPresetFilterForm();  
 		    createSearchForm();  
@@ -170,82 +156,83 @@
 		}
 
 	    function sort(e){
-			let orderBy = '';
+			let sortCol,sortDir,searchTerms;;
+			searchTerms = $('#searchStatus').attr('data-searchterms');
             $("#sortButtons input[type=radio]:checked").each(function() { 
-				sortColumn  = $(this).attr('data-sortcolumn'); 
-				sortDirection = $(this).attr('data-sortdirection');
-				orderBy += ' ' +  sortColumn + ' ' + sortDirection;
+				sortCol  = $(this).attr('data-sortcolumn'); 
+				sortDir = $(this).attr('data-sortdirection');
             });
-            $('#sortStatus').text('Now sorting by' + orderBy); 
+            $('#sortStatus').text('Now sorting by "' + sortCol + ' ' + sortDir + '"'); 
 			//update status attributes in live region so filtering can be done with the correct sorting 
-            $('#sortStatus').attr('data-sortcol', sortColumn); 
-            $('#sortStatus').attr('data-sortdir', sortDirection); 
-        	let jsonObjectsArray = getDataForSort(orderBy); 
+            $('#sortStatus').attr('data-sortcol', sortCol); 
+            $('#sortStatus').attr('data-sortdir', sortDir);
+			 
+        	let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 			createTable(jsonObjectsArray);
 		} 
-
 
 		function search() {
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
 			let sortDir = $("#sortStatus").attr('data-sortdir');
 			let searchTerms = [];
             let searchTerm = $("#searchInput").val();
-			searchTerms.push(searchTerm);//passing single item as array to use getPresetFilteredData() 
-			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
+			searchTerms.push(searchTerm);//passing single item as array to use getSearchData() 
+			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 			createTable(jsonObjectsArray);
 			$('#searchStatus').text('Now displaying results the from search term "' + searchTerm + '"');  
 		} 
 
-		function presetFilter(){
+		function presetSearch(){
 
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
 			let sortDir = $("#sortStatus").attr('data-sortdir'); 
 			let searchTerms = []; 
-			let length = $("#presetFilterContainer input[type='checkbox']:checked").length;
+			let length = $("#presetSearchContainer input[type='checkbox']:checked").length;
 
-            $("#presetFilterContainer input[type='checkbox']:checked").each(function() {
+            $("#presetSearchContainer input[type='checkbox']:checked").each(function() {
 				searchTerms.push($(this).val());
 	        }); 
 	
-			let jsonObjectsArray = getPresetFilteredData(searchTerms,sortCol,sortDir); 
+			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 
 			createTable(jsonObjectsArray);
 
-			let filterMessage = '';
+			let searchTermsString = '';
 			for(let i = 0; i < searchTerms.length; i++) {
-				filterMessage += '"';
-				filterMessage += searchTerms[i];
-				filterMessage += '"';
+				searchTermsString += '"';
+				searchTermsString += searchTerms[i];
+				searchTermsString += '"';
 				if(i < searchTerms.length - 1){
-					filterMessage += ', ';
+					searchTermsString += ', ';
 				} 
 			}
-            $('#presetFilterStatus').text('Now filtering all columns by the following preset search terms: ' + filterMessage ); 
+            $('#searchStatus').attr('data-searchterms',searchTerms); 
+            $('#searchStatus').text('Now filtering all columns by the following preset search terms: ' + searchTermsString ); 
 
 		}
 
 		function createPresetFilterForm() {
 			let searchStrings = ['test', 'testqqreqre', 'tttt']; 
-			let presetFilterForm = '';	
+			let presetSearchForm = '';	
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC';
 
 			let orderBy = 'ORDER BY ' +  defaultSortColumn + defaultSortDirection;
             
 			for(let i=0; i < searchStrings.length; i++){
-				presetFilterForm += '<div class="checkboxContainer">';
-				presetFilterForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
-				presetFilterForm += ' value="' + searchStrings[i] + '"';
-				presetFilterForm += '>';
-				presetFilterForm += '<label for="presetSearchTerm_' + i + '"' + '">';
-				presetFilterForm += searchStrings[i];
-				presetFilterForm += '</label>';
-				presetFilterForm += '</div>';
+				presetSearchForm += '<div class="checkboxContainer">';
+				presetSearchForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
+				presetSearchForm += ' value="' + searchStrings[i] + '"';
+				presetSearchForm += '>';
+				presetSearchForm += '<label for="presetSearchTerm_' + i + '"' + '">';
+				presetSearchForm += searchStrings[i];
+				presetSearchForm += '</label>';
+				presetSearchForm += '</div>';
 			} 
 
-			presetFilterForm += '<input id="presetFilterButton" type="submit" value="Submit Preset Filters">';
-			$('#presetFilterContainer').html(presetFilterForm);
-			$('#presetFilterButton').click(()=>{presetFilter();});
+			presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
+			$('#presetSearchContainer').html(presetSearchForm);
+			$('#presetSearchButton').click(()=>{presetSearch();});
 
 		} 
 
@@ -300,7 +287,7 @@
 
 			sortButtonsHtmlString += '</div>';
 			$('#sortButtons').html(sortButtonsHtmlString);
-            $('#sortStatus').text('Now sorting by id descending'); 
+            $('#sortStatus').text('Now sorting by "id descending"'); 
             $('#id_descending').attr('checked','checked'); 
 			$('#sortButtons input[type="radio"]').click((e)=>{sort(e)});
 		}
