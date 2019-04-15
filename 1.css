@@ -55,7 +55,12 @@
 			
 
 				/* BEGIN PresetSearch Form */
-        		.checkboxContainer input[type="checkbox"]{ width:2%; } 
+                #presetSearchContainer { display:flex; flex-wrap: wrap; } 
+                .presetCategory { margin-right:2%; } 
+                #presetSearchContainer ul { display:block; width:30%;  list-style-type:none; padding:0;  } 
+        		.checkboxContainer input[type="checkbox"], .checkboxContainer label { display:inline-block; } 
+        		.checkboxContainer input[type="checkbox"] { width:48%; } 
+        		.checkboxContainer label { width:17%; } 
 				/* END Preset Search Form */
 
 				/* BEGIN Manage Links */

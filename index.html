@@ -242,6 +242,7 @@
             } 
 
 			for (let category in categories) {
+				presetSearchForm += '<div class="presetCategory">';
 				presetSearchForm += '<h3>';
 				presetSearchForm += categories[category];
 				presetSearchForm += '</h3>';
@@ -255,21 +256,23 @@
                     }
 				} 
 
+				presetSearchForm += '<ul>';
 				for(let i=0; i < searchStrings.length; i++){
-					presetSearchForm += '<div class="checkboxContainer">';
+					presetSearchForm += '<li class="checkboxContainer">';
 					presetSearchForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
 					presetSearchForm += ' value="' + searchStrings[i] + '"';
 					presetSearchForm += '>';
 					presetSearchForm += '<label for="presetSearchTerm_' + i + '"' + '">';
 					presetSearchForm += searchStrings[i];
 					presetSearchForm += '</label>';
-					presetSearchForm += '</div>';
+					presetSearchForm += '</li>';
 				} 
 
-
+				presetSearchForm += '</ul>';
+				presetSearchForm += '</div>';
 			} 
 			            
-						presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
+			presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
 			$('#presetSearchContainer').html(presetSearchForm);
 			$('#presetSearchButton').click(()=>{presetSearch();});
 
