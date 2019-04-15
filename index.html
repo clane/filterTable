@@ -107,10 +107,10 @@
 
 	<script>
 
-		function getPresetSearchTerms(){
+		function getPresetSearchTerms(category){
 
 			let jsonObjectsArray = [];
-			let url = 'getPresetSearchTerms.php';
+			let url = 'getPresetSearchTerms.php?category=' + category;
 			$.ajax({
 			  type: "GET",
 			  url: url,
@@ -230,7 +230,6 @@
 
 		function createPresetSearchForm() {
             let categoryData = getPresetSearchCategories(); 
-			let searchStrings = []; 
 			let categories = []; 
 			let presetSearchForm = '';	
 			let defaultSortColumn = 'id';
@@ -246,9 +245,15 @@
 				presetSearchForm += '<h3>';
 				presetSearchForm += categories[category];
 				presetSearchForm += '</h3>';
+
 				let searchStrings = []; 
+ 				let data = getPresetSearchTerms(categories[category]);
 
-
+				for(let i = 0; i < data.length; i++) {
+					for (let key in data[i]) {
+						searchStrings.push(data[i][key]); 
+                    }
+				} 
 
 				for(let i=0; i < searchStrings.length; i++){
 					presetSearchForm += '<div class="checkboxContainer">';

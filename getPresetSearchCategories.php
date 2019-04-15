@@ -1,9 +1,9 @@
 <?php
 
 include 'dbVars.php';
-$category = $_GET['category'];
+
 $table = 'presetSearchTerms';
-$query = "SELECT * FROM $table WHERE category = \"$category\"";
+$query = "SELECT DISTINCT category FROM $table";
 $result = $dblink->query($query);
 $dbdata = array();
 
