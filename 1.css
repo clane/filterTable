@@ -53,17 +53,12 @@
 				form[action="delete.php"] .fieldNames { font-weight:bold;  } 
 				/* END Delete Form */
 			
-				/* BEGIN Filter Form */
-				form[action="filter.php"] input[type="submit"] { display:inline; } 
-				#filterContainer { width:50%;  } 
-				#filterContainer  label  { width:40%;  } 
-				/* END Filter Form */
 
 				/* BEGIN Preset Filter Form */
                 #presetFilterContainer { display:flex; } 
         		.checkboxContainer { display:flex; width:10%; border:1px solid #000; padding:5px; margin:10px 10px; border-radius:5px; } 
         		.checkboxContainer label { width:90%; } 
-        		.checkboxContainer input[type="checkbox"] { width:9%; } 
+                #presetFilterButton { width:16%; display:block; } 
 				/* END Preset Filter Form */
 
 				/* BEGIN Manage Links */
