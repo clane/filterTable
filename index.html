@@ -231,7 +231,7 @@
 		function createPresetSearchForm() {
             let categoryData = getPresetSearchCategories(); 
 			let categories = []; 
-			let presetSearchForm = '';	
+			let presetSearchForm = '<div id="presetWrapper">';	
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC';
 
@@ -272,6 +272,7 @@
 				presetSearchForm += '</div>';
 			} 
 			            
+			presetSearchForm += '</div>';
 			presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
 			$('#presetSearchContainer').html(presetSearchForm);
 			$('#presetSearchButton').click(()=>{presetSearch();});
