@@ -24,6 +24,7 @@
                 input { border-radius:5px; margin:10px auto; height:1.4rem; width:50%; }
                 select { width:10%; height:2rem; font-size:1rem; }
                 input[type="submit"] { font-size:1.5rem; width:20%; height:40px; color:#fff; background-color:#006BA6; }
+				[role="link"] { color:blue; text-decoration:underline; font-size:1rem; } 
                 /* END page level styles */
   
                 /* BEGIN Table */
