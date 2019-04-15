@@ -57,7 +57,7 @@
 				/* BEGIN PresetSearch Form */
                 #presetSearchContainer {  } 
                 #presetWrapper { display:flex; flex-wrap:wrap; } 
-                .presetCategory { margin-right:2%; } 
+                .presetCategory { margin-right:2%; width:10%; } 
                 #presetSearchContainer ul { display:block; width:30%;  list-style-type:none; padding:0;  } 
         		.checkboxContainer input[type="checkbox"], .checkboxContainer label { display:inline-block; } 
         		.checkboxContainer input[type="checkbox"] { width:48%; } 
