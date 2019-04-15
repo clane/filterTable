@@ -21,7 +21,7 @@
 	<script>
 
 		function getData(){
-			let url = './getTableJSON.php';
+			let url = './search.php';
 			let jsonObjectsArray = [];
 			$.ajax({
 			  type: 'GET',
@@ -38,7 +38,6 @@
 			let jsonObjectsArray = getData(); 
 			createInputForm(jsonObjectsArray); 
 		}
-
 
 
 		function createInputForm(jsonObjectsArray) {
