@@ -109,18 +109,6 @@
 
 		function getSearchData(sortCol,sortDir,searchTerms){
 
-			if(!searchTerms){
-				let searchTerms = 'NULL';
-			}
-
-			if(!sortCol){
-				let searchTerms = 'NULL';
-			}
-
-			if(!sortDir){
-				let searchTerms = 'NULL';
-			}
-
 			let jsonObjectsArray = [];
 			let url = 'search.php?searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
 			$.ajax({
@@ -136,7 +124,7 @@
 	    function init(){
 			let sortCol = 'id';
             let sortDir = 'DESC';
-			let searchTerms = false;
+			let searchTerms = "";
 			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 		    createSortControls(jsonObjectsArray);  
 		    createPresetFilterForm();  
@@ -179,7 +167,7 @@
 			searchTerms.push(searchTerm);//passing single item as array to use getSearchData() 
 			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 			createTable(jsonObjectsArray);
-			$('#searchStatus').text('Now displaying results the from search term "' + searchTerm + '"');  
+			$('#searchStatus').text('Searching by: "' + searchTerm + '"');  
 		} 
 
 		function presetSearch(){
@@ -207,7 +195,7 @@
 				} 
 			}
             $('#searchStatus').attr('data-searchterms',searchTerms); 
-            $('#searchStatus').text('Now filtering all columns by the following preset search terms: ' + searchTermsString ); 
+			$('#searchStatus').text('Searching by: ' + searchTermsString);  
 
 		}
 

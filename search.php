@@ -12,8 +12,7 @@ $searchTermsArray = explode(",",$searchTermsString);
 $selectQuery = "SELECT * FROM $table";
 
 
-//BEGIN where clause 
-if( !isset($_GET['searchTerms']) ){
+if(!empty($searchTermsString)){
 	$where = ' WHERE ';
 	//get the column names
 	while ($row = $result->fetch_assoc())  {
@@ -52,7 +51,7 @@ if( isset($_GET['sortCol']) &&  isset($_GET['sortCol']) ) {
 	$orderBy = "ORDER BY $sortColumn $sortDirection";
 }
 $selectQuery .= " $orderBy";
-//END` order by clause
+//END order by clause
 
 $selectResult = $dblink->query($selectQuery);
 

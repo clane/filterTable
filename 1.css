@@ -54,12 +54,12 @@
 				/* END Delete Form */
 			
 
-				/* BEGIN Preset Filter Form */
-                #presetFilterContainer { display:flex; } 
+				/* BEGIN PresetSearch Form */
+                #presetSearchContainer { display:flex; } 
         		.checkboxContainer { display:flex; width:10%; border:1px solid #000; padding:5px; margin:10px 10px; border-radius:5px; } 
         		.checkboxContainer label { width:90%; } 
-                #presetFilterButton { width:16%; display:block; } 
-				/* END Preset Filter Form */
+                #presetSearchButton { width:16%; display:block; } 
+				/* END Preset Search Form */
 
 				/* BEGIN Manage Links */
 				.manageLink { font-size:1rem; } 
