@@ -107,6 +107,20 @@
 
 	<script>
 
+		function getPresetSearchTerms(){
+
+			let jsonObjectsArray = [];
+			let url = 'getPresetSearchTerms.php';
+			$.ajax({
+			  type: "GET",
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
+	
 		function getSearchData(sortCol,sortDir,searchTerms){
 
 			let jsonObjectsArray = [];
@@ -121,13 +135,15 @@
 			return jsonObjectsArray;
 		}
 	
+ 
+
 	    function init(){
 			let sortCol = 'id';
             let sortDir = 'DESC';
 			let searchTerms = "";
 			let jsonObjectsArray = getSearchData(sortCol,sortDir,searchTerms); 
 		    createSortControls(jsonObjectsArray);  
-		    createPresetFilterForm();  
+		    createPresetSearchForm();  
 		    createSearchForm();  
 			createTable(jsonObjectsArray);
 
@@ -199,8 +215,21 @@
 
 		}
 
-		function createPresetFilterForm() {
-			let searchStrings = ['test', 'testqqreqre', 'tttt']; 
+		function createPresetSearchForm() {
+            let data = getPresetSearchTerms(); 
+			let searchStrings = []; 
+			console.log(data); 
+			for(let i = 0; i < data.length; i++) {
+				for (let key in data[i]) {
+					console.log(key);
+					console.log(data[i][key]);
+					if(key === 'searchTerm'){
+						searchStrings.push(data[i][key]); 
+					} 
+				} 
+	        }
+
+
 			let presetSearchForm = '';	
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC';
