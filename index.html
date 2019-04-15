@@ -71,11 +71,23 @@
 		<div id="accordionContainer3"></div>
 		<!-- END ACCORDION 3 --> 
 
-
-		<h2>Filter all columns using preset search terms</h2>
-		<p>Filter all columns by one or more of the preset search terms below.</p> 
+		<!-- BEGIN ACCORDION 4 --> 
+		<div 
+			role="link" 
+			class="accAccordion" 
+			data-internal="" 
+			data-role="Accordion" 
+			data-openstate="Expanded" 
+			data-insert="accordionContainer4" 
+			data-group="sharedGroupName" 
+			id="accordion4" 
+		> 
+			<h2>Preset Searches</h2>
+		</div>
 		<div id="presetFilterContainer"></div> 
- 		<input id="presetFilterButton" type="submit" value="Submit Preset Filters"> 
+		<div id="accordionContainer4"></div>
+		<!-- END ACCORDION 4 --> 
+
 
 
 		<h2>Status</h2>
@@ -231,9 +243,9 @@
 				presetFilterForm += searchStrings[i];
 				presetFilterForm += '</label>';
 				presetFilterForm += '</div>';
-
 			} 
 
+			presetFilterForm += '<input id="presetFilterButton" type="submit" value="Submit Preset Filters">';
 			$('#presetFilterContainer').html(presetFilterForm);
 			$('#presetFilterButton').click(()=>{presetFilter();});
 
@@ -311,8 +323,9 @@
 					if(key === 'id'){
 						tableHtmlString += jsonObjectsArray[i][key];	
 						tableHtmlString += '&nbsp;<a class="manageLink"href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
-						tableHtmlString += 'manage record ';	
+						tableHtmlString += 'manage';	
 						tableHtmlString += '<span class="offscreenText">';	
+						tableHtmlString += ' record ';	
 						tableHtmlString += jsonObjectsArray[i][key];	
 						tableHtmlString += '</span>'; 	
 						tableHtmlString += '</a>';	
