@@ -120,7 +120,20 @@
 			});
 			return jsonObjectsArray;
 		}
-	
+
+		function getPresetSearchCategories(){
+
+			let jsonObjectsArray = [];
+			let url = 'getPresetSearchCategories.php';
+			$.ajax({
+			  type: "GET",
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
 		function getSearchData(sortCol,sortDir,searchTerms){
 
 			let jsonObjectsArray = [];
@@ -216,45 +229,42 @@
 		}
 
 		function createPresetSearchForm() {
-            let data = getPresetSearchTerms(); 
+            let categoryData = getPresetSearchCategories(); 
 			let searchStrings = []; 
 			let categories = []; 
-
-			for(let i = 0; i < data.length; i++) {
-				for (let key in data[i]) {
-					console.log(key);
-					console.log(data[i][key]);
-					if(key === 'searchTerm'){
-						searchStrings.push(data[i][key]); 
-					}
-					if(key === 'category'){
-						categories.push(data[i][key]); 
-					}  
-				} 
-	        }
-
-
 			let presetSearchForm = '';	
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC';
 
-            
-			for(let i=0; i < searchStrings.length; i++){
-				presetSearchForm += '<div class="checkboxContainer">';
-				presetSearchForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
-				presetSearchForm += ' value="' + searchStrings[i] + '"';
-				presetSearchForm += '>';
-				presetSearchForm += '<label for="presetSearchTerm_' + i + '"' + '">';
-				presetSearchForm += searchStrings[i];
-				presetSearchForm += ' ';
-				presetSearchForm += '(';
-				presetSearchForm += categories[i];
-				presetSearchForm += ')';
-				presetSearchForm += '</label>';
-				presetSearchForm += '</div>';
-			} 
+			for(let i = 0; i < categoryData.length; i++) {
+				for (let key in categoryData[i]) {
+					categories.push(categoryData[i][key]); 
+				} 
+            } 
 
-			presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
+			for (let category in categories) {
+				presetSearchForm += '<h3>';
+				presetSearchForm += categories[category];
+				presetSearchForm += '</h3>';
+				let searchStrings = []; 
+
+
+
+				for(let i=0; i < searchStrings.length; i++){
+					presetSearchForm += '<div class="checkboxContainer">';
+					presetSearchForm += '<input type="checkbox" id="presetSearchTerm_' + i + '"';
+					presetSearchForm += ' value="' + searchStrings[i] + '"';
+					presetSearchForm += '>';
+					presetSearchForm += '<label for="presetSearchTerm_' + i + '"' + '">';
+					presetSearchForm += searchStrings[i];
+					presetSearchForm += '</label>';
+					presetSearchForm += '</div>';
+				} 
+
+
+			} 
+			            
+						presetSearchForm += '<input id="presetSearchButton" type="submit" value="Search">';
 			$('#presetSearchContainer').html(presetSearchForm);
 			$('#presetSearchButton').click(()=>{presetSearch();});
 
