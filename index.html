@@ -45,7 +45,7 @@
 			data-group="sharedGroupName" 
 			id="accordion2" 
 		> 
-			<h2>Column Sorting Controls</h2>
+			<h2>Sorting</h2>
 		</div>
 		<div id="sortButtons"></div>
 		<div id="accordionContainer2"></div>
@@ -218,14 +218,18 @@
 		function createPresetSearchForm() {
             let data = getPresetSearchTerms(); 
 			let searchStrings = []; 
-			console.log(data); 
+			let categories = []; 
+
 			for(let i = 0; i < data.length; i++) {
 				for (let key in data[i]) {
 					console.log(key);
 					console.log(data[i][key]);
 					if(key === 'searchTerm'){
 						searchStrings.push(data[i][key]); 
-					} 
+					}
+					if(key === 'category'){
+						categories.push(data[i][key]); 
+					}  
 				} 
 	        }
 
@@ -234,7 +238,6 @@
 			let defaultSortColumn = 'id';
 	 		let defaultSortDirection = 'DESC';
 
-			let orderBy = 'ORDER BY ' +  defaultSortColumn + defaultSortDirection;
             
 			for(let i=0; i < searchStrings.length; i++){
 				presetSearchForm += '<div class="checkboxContainer">';
@@ -243,6 +246,10 @@
 				presetSearchForm += '>';
 				presetSearchForm += '<label for="presetSearchTerm_' + i + '"' + '">';
 				presetSearchForm += searchStrings[i];
+				presetSearchForm += ' ';
+				presetSearchForm += '(';
+				presetSearchForm += categories[i];
+				presetSearchForm += ')';
 				presetSearchForm += '</label>';
 				presetSearchForm += '</div>';
 			} 
