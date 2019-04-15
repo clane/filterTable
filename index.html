@@ -36,8 +36,6 @@
 		<div id="accordionContainer1"></div>
 		<!-- END ACCORDION 1 --> 
 
-
-
 		<!-- BEGIN ACCORDION 2 --> 
 		<div 
 			role="link" 
@@ -79,18 +77,13 @@
 		<div id="presetFilterContainer"></div> 
  		<input id="presetFilterButton" type="submit" value="Submit Preset Filters"> 
 
-		<h2>Column Filtering using user defined search terms</h2>
-		<p>Enter a search term for one more columns using the form below.</p> 
-		<div id="filterContainer"></div>
 
 		<h2>Status</h2>
 
 		<ul>
 		<li><span id="count" aria-live="polite">0 results</span></li>
 		<li><span id="sortStatus" aria-live="polite" data-sortcol="id" data-sortdir="DESC" data-filtercol="" data-filterstring=""></span></li>
-		<li><span id="userDefinedAllFilterStatus" aria-live="polite">No user defined preset filters applied</span></li>
 		<li><span id="presetFilterStatus" aria-live="polite">No filtering using preset fllter values against all columns has been applied</span></li>
-		<li><span id="filterStatus" aria-live="polite">No filtering using user defined filter values against individual columns has been applied</span></li>
 		<li><span id="searchStatus" aria-live="polite">No search terms have been applied</span></li>
 		</ul>
 
@@ -133,19 +126,6 @@
 			return jsonObjectsArray;
 		}
 
-		function getFilteredData(query){
-			let url = './filter.php?' + query;
-			let jsonObjectsArray = [];
-			$.ajax({
-			  type: "GET",
-			  url: url,
-			  dataType: 'json',
-			  success: function(data) { jsonObjectsArray = data;},
-			  async: false
-			});
-			return jsonObjectsArray;
-		}
-
 		function getPresetFilteredData(searchTerms,sortCol,sortDir){
 			let url = './presetFilter.php?searchTerms=' + searchTerms + '&sortCol=' + sortCol + '&sortDir=' + sortDir;
 			console.log(url);
@@ -163,7 +143,6 @@
 	    function init(){
 			let jsonObjectsArray = getData(); 
 		    createSortControls(jsonObjectsArray);  
-			createFilterForm(jsonObjectsArray);//needs to come after the sort controls  
 		    createPresetFilterForm();  
 		    createSearchForm();  
 			createTable(jsonObjectsArray);
@@ -195,45 +174,6 @@
 			createTable(jsonObjectsArray);
 		} 
 
-		function filter(){
-			let length = $("#filterContainer input[type='text']").length;
-			let query = '';
-			let sortCol = $("#sortStatus").attr('data-sortcol'); 
-			let sortDir = $("#sortStatus").attr('data-sortdir'); 
-            let filterCols = [];
- 			let filterStrings = []; 
-            $("#filterContainer input[type='text']").each(function(index) { 
-				filterColumn  = $(this).attr('name'); 
-				filterString = $(this).val();
-				if(filterString.length > 0){
-					filterCols.push(filterColumn); 
-					filterStrings.push(filterString); 
-				}
-				query += filterColumn + '=' + filterString;
-				if (index !== (length - 1)){
-					query += '&';
-				}
-            });
-			query += '&';
-			query += 'filter_sort_column=' + sortCol;
-			query += '&';
-			query += 'filter_sort_direction=' + sortDir;
-        	let jsonObjectsArray = getFilteredData(query); 
-			createTable(jsonObjectsArray);
-            let filterMessage = '';
-			for(let i = 0; i < filterCols.length; i++) {
-				filterMessage += filterCols[i];
-				filterMessage += ' like ';
-				filterMessage += '"';
-				filterMessage += filterStrings[i];
-				filterMessage += '"';
-				if(i < filterCols.length - 1){
-					filterMessage += ' AND ';
-				}
-			}
-            $('#filterStatus').text('Now filtering by: ' +  filterMessage); 
-
-		}
 
 		function search() {
 			let sortCol = $("#sortStatus").attr('data-sortcol'); 
@@ -274,25 +214,6 @@
 
 		}
 
-		function createFilterForm(jsonObjectsArray) {
-			let filterForm = '';	
-			let defaultSortColumn = 'id';
-	 		let defaultSortDirection = 'DESC'; 
-
-			for (let key in jsonObjectsArray[0]) {
-				if(key !== 'id'){
-					filterForm += '<label for="' + key + 'filterInput"' + '>';
-					filterForm += 'Where ' +  key + ' contains: '; 
-					filterForm += '</label>';
-					filterForm += '<input type="text" id="' + key + 'filterInput"' + 'name="' + key + '">';
-				} 
-			}
-
-            filterForm += '<input type="submit" value="Filter">'; 
-			$('#filterContainer').html(filterForm);
-			$('#filterContainer input[type="submit"]').click(()=>{filter();});
-		} 
-			
 		function createPresetFilterForm() {
 			let searchStrings = ['test', 'testqqreqre', 'tttt']; 
 			let presetFilterForm = '';	
