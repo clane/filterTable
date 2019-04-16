@@ -55,6 +55,7 @@
 			
 
 				/* BEGIN PresetSearch Form */
+				.presetCategory h3 { text-decoration:underline; } 
                  [role="region"] { border:2px solid #000; border-radius:5px; padding:20px;  } 
                 #presetWrapper { display:flex; flex-wrap:wrap; } 
                 .presetCategory { margin-right:2%; width:10%; } 
