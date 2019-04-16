@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CX Guidelines Tool - Search Terms</title>
+	<link rel="stylesheet" href="1.css">
+  </head>
+  <body>
+
+    <section id="content">
+		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
+
+		<p><a id="skiplink" href="#tableh2">Skip to the Search Terms Table</a></p> 
+
+		<h1>Search Terms</h1>
+		 
+		<h2>Search Term Entry Form</h2>
+		<p><a href="">Entry Form</a></p> 
+
+
+		<div role="region">
+			<h2>Status</h2>
+			<ul>
+			<li><span id="count" aria-live="polite">0 results</span></li>
+			</ul>
+		</div>
+
+		<h2 id="tableh2" tabindex="-1">Search Term Table</h2>
+		<section id="tableContainer"></section>
+
+    </section>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script>
+
+		function getTableData(){
+
+			let jsonObjectsArray = [];
+			let url = 'getSearchTermTableJSON.php';
+			$.ajax({
+			  type: "GET",
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+        }
+
+
+	    function init(){
+			let jsonObjectsArray = getTableData(); 
+			createTable(jsonObjectsArray);
+
+			//manage skip link visibility
+			$('#skiplink').focus(()=>{ 
+				$('#skiplink').removeClass('offscreenText');
+			});
+			$('#skiplink').blur(()=>{ 
+				$('#skiplink').addClass('offscreenText');
+			});
+			$('#skiplink').click(()=>{ 
+				$('#tableh2').focus(); 
+			});
+		}
+
+    	function createTable(jsonObjectsArray){
+            tableHtmlString = '<table>';
+			tableHtmlString += '<tr>';
+			for (let key in jsonObjectsArray[0]) {
+				tableHtmlString += '<th>';
+				tableHtmlString += key; 
+				tableHtmlString += '</th>';
+			}
+			tableHtmlString += '</tr>';
+			for(let i = 0; i < jsonObjectsArray.length; i++) {
+				tableHtmlString += '<tr>';		
+				for (let key in jsonObjectsArray[i]) {
+					tableHtmlString += '<td>';		
+					if(key === 'id'){
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '&nbsp;<a class="manageLink"href="manageRecord.php?id=' + jsonObjectsArray[i][key] + '">';	
+						tableHtmlString += 'manage';	
+						tableHtmlString += '<span class="offscreenText">';	
+						tableHtmlString += ' record ';	
+						tableHtmlString += jsonObjectsArray[i][key];	
+						tableHtmlString += '</span>'; 	
+						tableHtmlString += '</a>';	
+					} else {
+						tableHtmlString += jsonObjectsArray[i][key];	
+					} 	
+					tableHtmlString += '</td>';		
+				}		
+				tableHtmlString += '</tr>';		
+			}
+			tableHtmlString += "</table>";
+			$('#tableContainer').html(tableHtmlString);
+			$('#count').text('Result count:  ' + jsonObjectsArray.length);
+		}
+		
+		init();  
+
+	</script>
+
+  </body>
+</html>
+
