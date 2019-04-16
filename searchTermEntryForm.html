@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CX Guidelines tool Search Term Entry Form</title>
+	<link rel="stylesheet" href="1.css">
+  </head>
+  <body>
+
+    <section id="content">
+		<img src="https://www.vmware.com/etc/clientlibs/vmwaredevapp/clientlib-nav-redesign/images/vm-logo.png" alt="vmware"/>
+    	<h1>CX Guidelines tool Search Term Entry Form</h1>
+		<div id="inputFormContainer"></div>
+
+		<p><a href="index.html">Home</a></p>
+
+    </section>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script>
+
+		function getData(){
+			let url = 'getSearchTermTableJSON.php';
+			let jsonObjectsArray = [];
+			$.ajax({
+			  type: 'GET',
+			  url: url,
+			  dataType: 'json',
+			  success: function(data) { jsonObjectsArray = data;},
+			  async: false
+			});
+			return jsonObjectsArray;
+		}
+
+
+	    function init(){
+			let jsonObjectsArray = getData(); 
+			createInputForm(jsonObjectsArray); 
+		}
+
+
+		function createInputForm(jsonObjectsArray) {
+			let inputForm = '';	
+			inputForm += '<form action="searchTermInsert.php" method="get">';
+			for (let key in jsonObjectsArray[0]) {
+					let id = key + '_input';
+					inputForm += '<div>';
+					if(key !== 'id'){
+						inputForm += '<label for="' + id + '"' + '>';
+						inputForm += key + ':';
+						inputForm += '</label>';
+					}
+					if(key === 'id'){
+						inputForm += '<input type="hidden" value="NULL"  id="' + id + '"' + ' name="' + key + '"' + '/>';
+					} else {
+						inputForm += '<input id="' + id + '"' + ' name="' + key + '"' + '/>';
+					} 
+
+				inputForm += '</div>';
+
+			} 
+            inputForm += '<input type="submit" value="Add">'; 
+			inputForm += '</form>';
+			$('#inputFormContainer').html(inputForm);
+		} 
+
+		
+		init();  
+
+	</script>
+
+  </body>
+</html>
+
