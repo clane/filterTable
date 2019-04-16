@@ -35,7 +35,7 @@ if ($result = mysqli_query($dblink, $query)) {
 
 	include 'top.php';
     echo '<p>To update this record you can edit the fields in  the following form. To delete this record use the link at the bottom of the page.</p>';
-	echo '<form action="update.php" method="get">';
+	echo '<form action="updateSearchTermRecord.php" method="get">';
 	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
 	  echo '<div>';
@@ -61,7 +61,7 @@ if ($result = mysqli_query($dblink, $query)) {
 
 echo '<p><a href="searchTermRecordDeleteForm.php?id=' . $getId . '">Delete search term record ' . $getId . '</button></p>';
 
-echo '<p><a href="searchTerms.html">Back</button></p>';
+echo '<p><a href="searchTerms.html">Back to Search Term Home</button></p>';
 
 include 'bottom.php';
 

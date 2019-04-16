@@ -2,8 +2,7 @@
 
 include 'dbVars.php';
 $category = $_GET['category'];
-$table = 'presetSearchTerms';
-$query = "SELECT searchTerm FROM $table WHERE category = \"$category\"";
+$query = "SELECT searchTerm FROM $presetSearchTermsTable WHERE category = \"$category\"";
 $result = $dblink->query($query);
 $dbdata = array();
 
