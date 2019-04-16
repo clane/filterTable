@@ -1,12 +1,10 @@
 <?php
 
-$pageTitle = "Manage Record";
-
 include 'dbVars.php';
 
 $getId = $_GET['id'];;
 
-$pageTitle = 'Manage search term record id: ' . $getId;
+$pageTitle = 'Delete search term record id: ' . $getId;
 
 $query =  "SELECT * FROM $presetSearchTermsTable WHERE id = $getId";
 
@@ -34,23 +32,23 @@ if ($result = mysqli_query($dblink, $query)) {
     mysqli_free_result($result);
 
 	include 'top.php';
-    echo '<p>To update this record you can edit the fields in  the following form. To delete this record use the link at the bottom of the page.</p>';
-	echo '<form action="update.php" method="get">';
+	echo '<h2>Are you sure you want to delete this record?</h2>';
+	echo '<form action="deleteSearchTermRecord.php" method="get">';
 	echo '<input type="hidden" name="id" value="' . $getId . '"' . '/>'; 
 	for ($i = 0; $i < count($fieldValues); $i++) {
-	  echo '<div>';
 	  if($fieldNames[$i] != 'id'){
-		  echo '<label for="' . $fieldNames[$i] . '-input"'. '>';
+	      echo '<div>';
+	      echo '<span class="fieldNames">';
 		  echo $fieldNames[$i];
-		  echo ':';
-		  echo '</label>';
-		  echo '<input type="text" ' . 'name="' . $fieldNames[$i] . '" '.  'id="' . $fieldNames[$i] . '-input"' . 'value="' . $fieldValues[$i] . '"' . '/>';
+	      echo ': ';
+	  	  echo '</span>';
+		  echo $fieldValues[$i];
+	  	  echo '</div>';
 	  } 
-	  echo '</div>';
 	}
 
 	echo '<div>';
-	echo '<input type="submit" value="Update" />';
+	echo '<input type="submit" value="Delete" />';
 	echo '</div>';
 	echo '</form>';
 
@@ -59,9 +57,8 @@ if ($result = mysqli_query($dblink, $query)) {
   		echo("<p>Error description: " . mysqli_error($dblink) . "</p>");
 }
 
-echo '<p><a href="searchTermRecordDeleteForm.php?id=' . $getId . '">Delete search term record ' . $getId . '</button></p>';
 
-echo '<p><a href="searchTerms.html">Back</button></p>';
+echo '<p><a href="manageSearchTermRecord.php?id=' . $getId . '">Back' . '</a></p>';
 
 include 'bottom.php';
 
